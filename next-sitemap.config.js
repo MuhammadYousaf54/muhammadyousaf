@@ -1,7 +1,7 @@
 /** @type {import('next-sitemap').IConfig} */
 const config = {
   siteUrl: "https://muhammadyousaf.vercel.app",
-  outDir: "dist",
+  outDir: "public",
   generateRobotsTxt: true,
   staticPaths: [
     "/",

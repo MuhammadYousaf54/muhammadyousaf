@@ -5,11 +5,11 @@
   "type": "module",
   "scripts": {
     "dev": "vite --host",
+    "prebuild": "node scripts/generate-sitemap.mjs",
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "connect-db": "node server/connect.js",
-    "postbuild": "node scripts/generate-sitemap.mjs"
+    "connect-db": "node server/connect.js"
   },
   "dependencies": {
     "@emailjs/browser": "^4.4.1",

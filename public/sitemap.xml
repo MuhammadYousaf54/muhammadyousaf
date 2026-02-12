@@ -1,63 +1,75 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://muhammadyousaf.vercel.app/</loc>
+    <loc>https://muhammadyousaf.vercel.app</loc>
+    <lastmod>2026-02-12T17:55:57.550Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://muhammadyousaf.vercel.app/about</loc>
+    <lastmod>2026-02-12T17:55:57.550Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://muhammadyousaf.vercel.app/services</loc>
+    <lastmod>2026-02-12T17:55:57.550Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://muhammadyousaf.vercel.app/contact</loc>
+    <lastmod>2026-02-12T17:55:57.550Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://muhammadyousaf.vercel.app/github</loc>
+    <lastmod>2026-02-12T17:55:57.550Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://muhammadyousaf.vercel.app/blog</loc>
+    <lastmod>2026-02-12T17:55:57.550Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://muhammadyousaf.vercel.app/blog/favorites</loc>
+    <lastmod>2026-02-12T17:55:57.550Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://muhammadyousaf.vercel.app/login</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
+    <lastmod>2026-02-12T17:55:57.550Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://muhammadyousaf.vercel.app/service/web-development</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <lastmod>2026-02-12T17:55:57.550Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://muhammadyousaf.vercel.app/service/ai-automation</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <lastmod>2026-02-12T17:55:57.550Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://muhammadyousaf.vercel.app/service/digital-marketing</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <lastmod>2026-02-12T17:55:57.550Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://muhammadyousaf.vercel.app/service/data-analysis</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <lastmod>2026-02-12T17:55:57.550Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
 </urlset>
