@@ -42,6 +42,7 @@ function Layout() {
   return (
     <>
       <ScrollToTop />
+      <RouteSEO />
       <Header />
       <Outlet />
       <WhatsAppFloat />
@@ -55,6 +56,104 @@ function ScrollToTop() {
 
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+  }, [pathname]);
+
+  return null;
+}
+
+function RouteSEO() {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    const siteUrl = "https://muhammadyousaf.vercel.app";
+    const normalizedPath = pathname.startsWith("/") ? pathname : `/${pathname}`;
+    const url = `${siteUrl}${normalizedPath === "/" ? "/" : normalizedPath}`;
+
+    const seoByRoute = {
+      "/": {
+        title: "Muhammad Yousaf | Full Stack Developer & AI Automation Expert",
+        description:
+          "Portfolio of Muhammad Yousaf, Full Stack Developer specializing in MERN stack, AI automation, and scalable web applications.",
+      },
+      "/about": {
+        title: "About | Muhammad Yousaf",
+        description:
+          "Learn about Muhammad Yousaf's experience in web development, AI automation, data analysis, and digital solutions.",
+      },
+      "/services": {
+        title: "Services | Muhammad Yousaf",
+        description:
+          "Explore web development, AI automation, digital marketing, and data analysis services by Muhammad Yousaf.",
+      },
+      "/contact": {
+        title: "Contact | Muhammad Yousaf",
+        description: "Contact Muhammad Yousaf for full-stack development, AI automation, and business web solutions.",
+      },
+      "/github": {
+        title: "GitHub Profile | Muhammad Yousaf",
+        description: "View Muhammad Yousaf's GitHub repositories and development activity.",
+      },
+      "/blog": {
+        title: "Blog | Muhammad Yousaf",
+        description: "Read articles on React, AI automation, web development, and software best practices.",
+      },
+      "/blog/favorites": {
+        title: "Favorite Blogs | Muhammad Yousaf",
+        description: "Saved and favorite articles by Muhammad Yousaf.",
+      },
+      "/login": {
+        title: "Login | Muhammad Yousaf",
+        description: "Login page for admin and user access.",
+      },
+    };
+
+    const routeSEO = seoByRoute[normalizedPath] || {
+      title: "Muhammad Yousaf | Full Stack Developer",
+      description:
+        "Muhammad Yousaf portfolio featuring web development, MERN stack projects, and AI automation solutions.",
+    };
+
+    const noIndexPaths = ["/blog/admin"];
+    const isNoIndex = noIndexPaths.some((path) => normalizedPath.startsWith(path));
+    const robotsContent = isNoIndex ? "noindex, nofollow" : "index, follow";
+
+    document.title = routeSEO.title;
+
+    const updateMetaByName = (name, content) => {
+      let tag = document.querySelector(`meta[name="${name}"]`);
+      if (!tag) {
+        tag = document.createElement("meta");
+        tag.setAttribute("name", name);
+        document.head.appendChild(tag);
+      }
+      tag.setAttribute("content", content);
+    };
+
+    const updateMetaByProperty = (property, content) => {
+      let tag = document.querySelector(`meta[property="${property}"]`);
+      if (!tag) {
+        tag = document.createElement("meta");
+        tag.setAttribute("property", property);
+        document.head.appendChild(tag);
+      }
+      tag.setAttribute("content", content);
+    };
+
+    let canonical = document.querySelector('link[rel="canonical"]');
+    if (!canonical) {
+      canonical = document.createElement("link");
+      canonical.setAttribute("rel", "canonical");
+      document.head.appendChild(canonical);
+    }
+    canonical.setAttribute("href", url);
+
+    updateMetaByName("description", routeSEO.description);
+    updateMetaByName("robots", robotsContent);
+    updateMetaByName("googlebot", `${robotsContent}, max-image-preview:large`);
+    updateMetaByProperty("og:title", routeSEO.title);
+    updateMetaByProperty("og:description", routeSEO.description);
+    updateMetaByProperty("og:url", url);
+    updateMetaByProperty("og:type", "website");
   }, [pathname]);
 
   return null;
