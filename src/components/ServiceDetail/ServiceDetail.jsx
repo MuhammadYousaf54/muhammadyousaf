@@ -1,10 +1,11 @@
-// import React from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+﻿// import React from 'react';
+import { useParams, useNavigate } from '@router';
 import { Code, Zap, TrendingUp, BarChart3, Mail, Phone, MessageCircle } from 'lucide-react';
 import ProjectCard from '../ProjectCard/ProjectCard';
 
 export default function ServiceDetail() {
-  const { serviceId } = useParams();
+  const params = useParams();
+  const serviceId = params?.serviceId;
   const navigate = useNavigate();
 
   const handleGetStarted = (planName, price) => {
@@ -276,3 +277,4 @@ export default function ServiceDetail() {
     </div>
   );
 }
+

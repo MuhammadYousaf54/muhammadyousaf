@@ -1,5 +1,5 @@
-/* eslint-disable react/no-unescaped-entities */
-import { useNavigate } from "react-router-dom";
+﻿/* eslint-disable react/no-unescaped-entities */
+import { useNavigate } from "@router";
 import ProjectCard from "../ProjectCard/ProjectCard";
 import { Code, Zap, TrendingUp, BarChart3 } from "lucide-react";
 
@@ -40,7 +40,7 @@ export default function Home() {
       description: "Full-featured e-commerce platform with payment integration, inventory management, and order tracking.",
       link: "#",
       image: "https://source.unsplash.com/400x300/?ecommerce,shopping,store",
-      icon: "🛍️",
+      icon: "ðŸ›ï¸",
       service: "web-development"
     },
     {
@@ -48,7 +48,7 @@ export default function Home() {
       description: "Real-time messaging application with WebSocket integration, user authentication, and file sharing.",
       link: "#",
       image: "https://source.unsplash.com/400x300/?chat,messaging,communication",
-      icon: "💬",
+      icon: "ðŸ’¬",
       service: "web-development"
     },
     {
@@ -56,7 +56,7 @@ export default function Home() {
       description: "Microservices-based application deployed on Kubernetes for high scalability and resilience.",
       link: "#",
       image: "https://source.unsplash.com/400x300/?cloud,server,infrastructure",
-      icon: "☁️",
+      icon: "â˜ï¸",
       service: "web-development"
     },
     {
@@ -64,7 +64,7 @@ export default function Home() {
       description: "Collaborative project management platform with Gantt charts, kanban boards, and team analytics.",
       link: "#",
       image: "https://source.unsplash.com/400x300/?task,checklist,organization",
-      icon: "✅",
+      icon: "âœ…",
       service: "web-development"
     },
     {
@@ -72,7 +72,7 @@ export default function Home() {
       description: "Complete LMS with course creation, student enrollment, progress tracking, and live classes.",
       link: "#",
       image: "https://source.unsplash.com/400x300/?education,learning,online,course",
-      icon: "📚",
+      icon: "ðŸ“š",
       service: "web-development"
     },
     {
@@ -80,7 +80,7 @@ export default function Home() {
       description: "Interactive dashboard displaying live metrics, charts, and business intelligence reports.",
       link: "#",
       image: "https://source.unsplash.com/400x300/?analytics,dashboard,data,charts",
-      icon: "📊",
+      icon: "ðŸ“Š",
       service: "web-development"
     },
 
@@ -90,7 +90,7 @@ export default function Home() {
       description: "Intelligent chatbot using NLP and machine learning for customer support automation.",
       link: "#",
       image: "https://source.unsplash.com/400x300/?chatbot,artificial intelligence,AI",
-      icon: "🤖",
+      icon: "ðŸ¤–",
       service: "ai-automation"
     },
     {
@@ -98,7 +98,7 @@ export default function Home() {
       description: "Machine learning model for sales forecasting and customer behavior prediction.",
       link: "#",
       image: "https://source.unsplash.com/400x300/?machine learning,prediction,forecast",
-      icon: "🔮",
+      icon: "ðŸ”®",
       service: "ai-automation"
     },
     {
@@ -106,7 +106,7 @@ export default function Home() {
       description: "Automated CRM with lead scoring, email automation, and pipeline management powered by AI.",
       link: "#",
       image: "https://source.unsplash.com/400x300/?CRM,sales,automation,business",
-      icon: "💼",
+      icon: "ðŸ’¼",
       service: "ai-automation"
     },
     {
@@ -114,7 +114,7 @@ export default function Home() {
       description: "OCR and document extraction system using AI for automated data processing.",
       link: "#",
       image: "https://source.unsplash.com/400x300/?document,OCR,processing,data",
-      icon: "📄",
+      icon: "ðŸ“„",
       service: "ai-automation"
     },
     {
@@ -122,7 +122,7 @@ export default function Home() {
       description: "Automated business process workflows with AI-powered decision making and optimization.",
       link: "#",
       image: "https://source.unsplash.com/400x300/?workflow,automation,process,business",
-      icon: "⚙️",
+      icon: "âš™ï¸",
       service: "ai-automation"
     },
     {
@@ -130,7 +130,7 @@ export default function Home() {
       description: "AI-powered sentiment analysis tool for social media monitoring and feedback analysis.",
       link: "#",
       image: "https://source.unsplash.com/400x300/?sentiment,analysis,social,AI",
-      icon: "😊",
+      icon: "ðŸ˜Š",
       service: "ai-automation"
     },
 
@@ -140,7 +140,7 @@ export default function Home() {
       description: "Complete platform for managing, scheduling, and analyzing multi-channel social media campaigns.",
       link: "#",
       image: "https://source.unsplash.com/400x300/?social media,marketing,campaign",
-      icon: "📱",
+      icon: "ðŸ“±",
       service: "digital-marketing"
     },
     {
@@ -148,7 +148,7 @@ export default function Home() {
       description: "Advanced email marketing platform with automation workflows, segmentation, and A/B testing.",
       link: "#",
       image: "https://source.unsplash.com/400x300/?email,marketing,automation",
-      icon: "✉️",
+      icon: "âœ‰ï¸",
       service: "digital-marketing"
     },
     {
@@ -156,7 +156,7 @@ export default function Home() {
       description: "Comprehensive SEO tracking tool with keyword monitoring, competitor analysis, and rankings.",
       link: "#",
       image: "https://source.unsplash.com/400x300/?SEO,search,analytics,optimization",
-      icon: "🔍",
+      icon: "ðŸ”",
       service: "digital-marketing"
     },
     {
@@ -164,7 +164,7 @@ export default function Home() {
       description: "Interactive content planning and calendar management tool for teams and agencies.",
       link: "#",
       image: "https://source.unsplash.com/400x300/?content,calendar,planning,organization",
-      icon: "📅",
+      icon: "ðŸ“…",
       service: "digital-marketing"
     },
     {
@@ -172,7 +172,7 @@ export default function Home() {
       description: "Platform connecting brands with influencers, managing campaigns and tracking ROI.",
       link: "#",
       image: "https://source.unsplash.com/400x300/?influencer,marketing,social,brand",
-      icon: "⭐",
+      icon: "â­",
       service: "digital-marketing"
     },
     {
@@ -180,7 +180,7 @@ export default function Home() {
       description: "Complete brand monitoring and analytics suite for reputation management and insights.",
       link: "#",
       image: "https://source.unsplash.com/400x300/?brand,monitoring,analytics,business",
-      icon: "🎯",
+      icon: "ðŸŽ¯",
       service: "digital-marketing"
     },
 
@@ -190,7 +190,7 @@ export default function Home() {
       description: "Advanced analytics platform for sales forecasting, trend analysis, and performance metrics.",
       link: "#",
       image: "https://source.unsplash.com/400x300/?sales,analytics,data,graphs",
-      icon: "💹",
+      icon: "ðŸ’¹",
       service: "data-analysis"
     },
     {
@@ -198,7 +198,7 @@ export default function Home() {
       description: "Real-time financial analytics dashboard for expense tracking and revenue analysis.",
       link: "#",
       image: "https://source.unsplash.com/400x300/?finance,money,dashboard,data",
-      icon: "💰",
+      icon: "ðŸ’°",
       service: "data-analysis"
     },
     {
@@ -206,7 +206,7 @@ export default function Home() {
       description: "Deep dive into customer data with behavioral analysis, segmentation, and lifetime value prediction.",
       link: "#",
       image: "https://source.unsplash.com/400x300/?customer,behavior,analysis,data",
-      icon: "👥",
+      icon: "ðŸ‘¥",
       service: "data-analysis"
     },
     {
@@ -214,7 +214,7 @@ export default function Home() {
       description: "Comprehensive BI tool with data visualization, reporting, and predictive analytics.",
       link: "#",
       image: "https://source.unsplash.com/400x300/?business intelligence,analytics,data,visualization",
-      icon: "📈",
+      icon: "ðŸ“ˆ",
       service: "data-analysis"
     },
     {
@@ -222,7 +222,7 @@ export default function Home() {
       description: "Data collection and analysis tool for market research with survey and analytics features.",
       link: "#",
       image: "https://source.unsplash.com/400x300/?market research,data,survey,analysis",
-      icon: "🔬",
+      icon: "ðŸ”¬",
       service: "data-analysis"
     },
     {
@@ -230,7 +230,7 @@ export default function Home() {
       description: "Real-time KPI tracking and performance measurement for business operations.",
       link: "#",
       image: "https://source.unsplash.com/400x300/?performance,metrics,KPI,dashboard",
-      icon: "📋",
+      icon: "ðŸ“‹",
       service: "data-analysis"
     }
   ];
@@ -399,17 +399,17 @@ export default function Home() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full">
               {/* Basic Plan */}
               <div className="bg-gradient-to-br from-gray-50 to-blue-50 dark:from-gray-900 dark:to-blue-950 rounded-2xl shadow-lg p-8 border-2 border-gray-200 dark:border-blue-800 hover:shadow-2xl transition-all hover:scale-105 hover:border-blue-500">
-                <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">💎 Basic</h3>
+                <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">ðŸ’Ž Basic</h3>
                 <p className="text-gray-600 dark:text-gray-400 mb-4 font-medium">Perfect for getting started</p>
                 <div className="mb-6">
                   <span className="text-5xl font-black bg-gradient-to-r from-blue-600 to-cyan-500 bg-clip-text text-transparent">$500</span>
                   <span className="text-gray-600 dark:text-gray-400">/month</span>
                 </div>
                 <ul className="space-y-3 mb-8 text-gray-700 dark:text-gray-300">
-                  <li className="flex items-center"><span className="text-blue-500 dark:text-blue-400 mr-3 text-xl">✦</span> Basic Website</li>
-                  <li className="flex items-center"><span className="text-blue-500 dark:text-blue-400 mr-3 text-xl">✦</span> 5 Pages</li>
-                  <li className="flex items-center"><span className="text-blue-500 dark:text-blue-400 mr-3 text-xl">✦</span> Email Support</li>
-                  <li className="flex items-center"><span className="text-blue-500 dark:text-blue-400 mr-3 text-xl">✦</span> Hosting Included</li>
+                  <li className="flex items-center"><span className="text-blue-500 dark:text-blue-400 mr-3 text-xl">âœ¦</span> Basic Website</li>
+                  <li className="flex items-center"><span className="text-blue-500 dark:text-blue-400 mr-3 text-xl">âœ¦</span> 5 Pages</li>
+                  <li className="flex items-center"><span className="text-blue-500 dark:text-blue-400 mr-3 text-xl">âœ¦</span> Email Support</li>
+                  <li className="flex items-center"><span className="text-blue-500 dark:text-blue-400 mr-3 text-xl">âœ¦</span> Hosting Included</li>
                 </ul>
                 <button 
                   onClick={() => navigate('/contact?service=Service+Plan&plan=Basic&price=500')}
@@ -420,18 +420,18 @@ export default function Home() {
 
               {/* Standard Plan */}
               <div className="bg-gradient-to-br from-orange-50 to-pink-50 dark:from-orange-950 dark:to-pink-950 rounded-2xl shadow-2xl p-8 border-2 border-orange-500 dark:border-orange-600 hover:shadow-2xl transition-all transform scale-105 relative z-10">
-                <div className="bg-gradient-to-r from-orange-500 to-pink-500 text-white text-center py-3 rounded-lg mb-4 font-bold text-lg shadow-lg">⭐ MOST POPULAR</div>
-                <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">🚀 Standard</h3>
+                <div className="bg-gradient-to-r from-orange-500 to-pink-500 text-white text-center py-3 rounded-lg mb-4 font-bold text-lg shadow-lg">â­ MOST POPULAR</div>
+                <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">ðŸš€ Standard</h3>
                 <p className="text-gray-600 dark:text-gray-400 mb-4 font-medium">Most popular choice</p>
                 <div className="mb-6">
                   <span className="text-5xl font-black bg-gradient-to-r from-orange-600 to-pink-600 bg-clip-text text-transparent">$1200</span>
                   <span className="text-gray-600 dark:text-gray-400">/month</span>
                 </div>
                 <ul className="space-y-3 mb-8 text-gray-700 dark:text-gray-300">
-                  <li className="flex items-center"><span className="text-orange-500 dark:text-orange-400 mr-3 text-xl">✦</span> Advanced Website</li>
-                  <li className="flex items-center"><span className="text-orange-500 dark:text-orange-400 mr-3 text-xl">✦</span> 20 Pages</li>
-                  <li className="flex items-center"><span className="text-orange-500 dark:text-orange-400 mr-3 text-xl">✦</span> CRM Integration</li>
-                  <li className="flex items-center"><span className="text-orange-500 dark:text-orange-400 mr-3 text-xl">✦</span> Priority Support</li>
+                  <li className="flex items-center"><span className="text-orange-500 dark:text-orange-400 mr-3 text-xl">âœ¦</span> Advanced Website</li>
+                  <li className="flex items-center"><span className="text-orange-500 dark:text-orange-400 mr-3 text-xl">âœ¦</span> 20 Pages</li>
+                  <li className="flex items-center"><span className="text-orange-500 dark:text-orange-400 mr-3 text-xl">âœ¦</span> CRM Integration</li>
+                  <li className="flex items-center"><span className="text-orange-500 dark:text-orange-400 mr-3 text-xl">âœ¦</span> Priority Support</li>
                 </ul>
                 <button 
                   onClick={() => navigate('/contact?service=Service+Plan&plan=Standard&price=1200')}
@@ -442,17 +442,17 @@ export default function Home() {
 
               {/* Premium Plan */}
               <div className="bg-gradient-to-br from-purple-50 to-pink-50 dark:from-purple-950 dark:to-pink-950 rounded-2xl shadow-lg p-8 border-2 border-purple-200 dark:border-purple-800 hover:shadow-2xl transition-all hover:scale-105 hover:border-purple-500">
-                <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">👑 Premium</h3>
+                <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">ðŸ‘‘ Premium</h3>
                 <p className="text-gray-600 dark:text-gray-400 mb-4 font-medium">For advanced needs</p>
                 <div className="mb-6">
                   <span className="text-5xl font-black bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">$2500</span>
                   <span className="text-gray-600 dark:text-gray-400">/month</span>
                 </div>
                 <ul className="space-y-3 mb-8 text-gray-700 dark:text-gray-300">
-                  <li className="flex items-center"><span className="text-purple-500 dark:text-purple-400 mr-3 text-xl">✦</span> Full Custom Development</li>
-                  <li className="flex items-center"><span className="text-purple-500 dark:text-purple-400 mr-3 text-xl">✦</span> Unlimited Pages</li>
-                  <li className="flex items-center"><span className="text-purple-500 dark:text-purple-400 mr-3 text-xl">✦</span> AI Automation</li>
-                  <li className="flex items-center"><span className="text-purple-500 dark:text-purple-400 mr-3 text-xl">✦</span> 24/7 Support</li>
+                  <li className="flex items-center"><span className="text-purple-500 dark:text-purple-400 mr-3 text-xl">âœ¦</span> Full Custom Development</li>
+                  <li className="flex items-center"><span className="text-purple-500 dark:text-purple-400 mr-3 text-xl">âœ¦</span> Unlimited Pages</li>
+                  <li className="flex items-center"><span className="text-purple-500 dark:text-purple-400 mr-3 text-xl">âœ¦</span> AI Automation</li>
+                  <li className="flex items-center"><span className="text-purple-500 dark:text-purple-400 mr-3 text-xl">âœ¦</span> 24/7 Support</li>
                 </ul>
                 <button 
                   onClick={() => navigate('/contact?service=Service+Plan&plan=Premium&price=2500')}
@@ -467,3 +467,4 @@ export default function Home() {
     </div>
   );
 }
+

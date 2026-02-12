@@ -1,8 +1,16 @@
-# React + Vite
+# Portfolio (Next.js)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project now runs on Next.js (Pages Router).
 
-Currently, two official plugins are available:
+## Scripts
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- `npm run dev` - start development server on `0.0.0.0:3000`
+- `npm run build` - production build (also regenerates sitemap/robots)
+- `npm run start` - run production server
+- `npm run lint` - run ESLint
+
+## SEO files
+
+- `public/sitemap.xml`
+- `public/robots.txt`
+- `public/google8ef289258f8176c7.html`

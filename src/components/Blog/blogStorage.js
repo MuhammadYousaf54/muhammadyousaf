@@ -113,10 +113,12 @@ export function getStoredPosts() {
 }
 
 export function savePosts(posts) {
+  if (typeof window === "undefined") return;
   localStorage.setItem(BLOG_STORAGE_KEY, JSON.stringify(posts));
 }
 
 function getStoredIdList(storageKey) {
+  if (typeof window === "undefined") return [];
   const raw = localStorage.getItem(storageKey);
   if (!raw) return [];
   try {
@@ -128,6 +130,7 @@ function getStoredIdList(storageKey) {
 }
 
 function saveStoredIdList(storageKey, ids) {
+  if (typeof window === "undefined") return;
   localStorage.setItem(storageKey, JSON.stringify(ids));
 }
 
@@ -174,6 +177,7 @@ export function toggleLikePost(postId, posts) {
 }
 
 export function isAdminUser() {
+  if (typeof window === "undefined") return false;
   const email = (localStorage.getItem("userEmail") || "").toLowerCase();
   const ownerMatch = email === "muhammadyousaf5482@gmail.com";
   return localStorage.getItem("isLoggedIn") === "true" && (localStorage.getItem("userRole") === "Admin" || ownerMatch);
@@ -196,6 +200,7 @@ export function createPostId() {
 }
 
 export function getCommentAuthorName() {
+  if (typeof window === "undefined") return "Guest User";
   const userName = localStorage.getItem("userName");
   if (userName && userName.trim()) return userName.trim();
   return "Guest User";

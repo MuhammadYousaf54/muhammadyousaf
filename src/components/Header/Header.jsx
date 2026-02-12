@@ -1,22 +1,26 @@
-import { useState, useEffect } from 'react'
-import {Link, NavLink, useNavigate} from 'react-router-dom'
+﻿import { useState, useEffect } from 'react'
+import {Link, NavLink, useNavigate} from '@router'
 import { Moon, Sun, LogOut, Menu, X, LayoutDashboard } from 'lucide-react'
 
 export default function Header() {
     const navigate = useNavigate()
     const [isDark, setIsDark] = useState(() => {
+        if (typeof window === "undefined") return false;
         return localStorage.getItem('theme') === 'dark';
     });
     
     const [isLoggedIn, setIsLoggedIn] = useState(() => {
+        if (typeof window === "undefined") return false;
         return localStorage.getItem('isLoggedIn') === 'true';
     });
     
     const [userRole, setUserRole] = useState(() => {
+        if (typeof window === "undefined") return null;
         return localStorage.getItem('userRole') || null;
     });
 
     const [isOwnerAdmin, setIsOwnerAdmin] = useState(() => {
+        if (typeof window === "undefined") return false;
         const savedFlag = localStorage.getItem('isOwnerAdmin') === 'true';
         const savedEmail = (localStorage.getItem('userEmail') || '').toLowerCase();
         return savedFlag || savedEmail === 'muhammadyousaf5482@gmail.com';
@@ -207,3 +211,4 @@ export default function Header() {
         </header>
     );
 }
+

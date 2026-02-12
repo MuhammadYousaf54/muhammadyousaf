@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom'
+﻿import { useParams } from '@router'
 
 function User() {
     const {userid} = useParams()
@@ -8,3 +8,4 @@ function User() {
 }
 
 export default User
+

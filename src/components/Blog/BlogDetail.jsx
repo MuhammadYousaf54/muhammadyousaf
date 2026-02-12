@@ -1,6 +1,6 @@
-import { useMemo, useState } from "react";
+﻿import { useMemo, useState } from "react";
 import { ArrowLeft, Calendar, Clock, User, Heart, Eye, MessageCircle, Bookmark } from "lucide-react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "@router";
 import {
   formatDisplayDate,
   getBookmarkedPostIds,
@@ -194,3 +194,4 @@ export default function BlogDetail() {
     </div>
   );
 }
+

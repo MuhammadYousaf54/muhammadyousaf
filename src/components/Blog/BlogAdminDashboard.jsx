@@ -1,5 +1,5 @@
-import { useMemo, useState } from "react";
-import { Link, Navigate } from "react-router-dom";
+﻿import { useMemo, useState } from "react";
+import { Link, Navigate } from "@router";
 import { Pencil, Trash2, PlusCircle, ArrowLeft } from "lucide-react";
 import { categories, createPostId, estimateReadTime, getStoredPosts, isAdminUser, normalizeCategory, savePosts } from "./blogStorage";
 
@@ -291,3 +291,4 @@ export default function BlogAdminDashboard() {
     </div>
   );
 }
+

@@ -1,5 +1,5 @@
-import React from 'react'
-import { useNavigate } from 'react-router-dom'
+﻿import React from 'react'
+import { useNavigate } from '@router'
 import { Code, Zap, TrendingUp, BarChart3 } from 'lucide-react'
 
 export default function OurServices() {
@@ -121,10 +121,10 @@ export default function OurServices() {
           <div className="bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-900 rounded-lg sm:rounded-xl p-4 sm:p-6 md:p-8 border border-gray-300 dark:border-gray-700">
             <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-gray-900 dark:text-white mb-4 sm:mb-6">Basic Plan</h3>
             <ul className="space-y-2 sm:space-y-3 text-xs sm:text-sm md:text-base text-gray-700 dark:text-gray-300 mb-6 sm:mb-8">
-              <li className="flex items-center"><span className="text-orange-500 mr-2 sm:mr-3 text-lg sm:text-xl">✓</span> Core Service</li>
-              <li className="flex items-center"><span className="text-orange-500 mr-2 sm:mr-3 text-lg sm:text-xl">✓</span> Email Support</li>
-              <li className="flex items-center"><span className="text-orange-500 mr-2 sm:mr-3 text-lg sm:text-xl">✓</span> Starter Package</li>
-              <li className="flex items-center"><span className="text-orange-500 mr-2 sm:mr-3 text-lg sm:text-xl">✓</span> 1 Month Setup</li>
+              <li className="flex items-center"><span className="text-orange-500 mr-2 sm:mr-3 text-lg sm:text-xl">âœ“</span> Core Service</li>
+              <li className="flex items-center"><span className="text-orange-500 mr-2 sm:mr-3 text-lg sm:text-xl">âœ“</span> Email Support</li>
+              <li className="flex items-center"><span className="text-orange-500 mr-2 sm:mr-3 text-lg sm:text-xl">âœ“</span> Starter Package</li>
+              <li className="flex items-center"><span className="text-orange-500 mr-2 sm:mr-3 text-lg sm:text-xl">âœ“</span> 1 Month Setup</li>
             </ul>
             <button className="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded-lg transition-colors text-sm sm:text-base">Choose Basic</button>
           </div>
@@ -134,10 +134,10 @@ export default function OurServices() {
             <div className="bg-orange-500 text-white text-center py-1 sm:py-2 rounded-lg mb-3 sm:mb-4 font-bold text-xs sm:text-sm">MOST POPULAR</div>
             <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-gray-900 dark:text-white mb-4 sm:mb-6">Standard Plan</h3>
             <ul className="space-y-2 sm:space-y-3 text-xs sm:text-sm md:text-base text-gray-700 dark:text-gray-300 mb-6 sm:mb-8">
-              <li className="flex items-center"><span className="text-orange-600 mr-2 sm:mr-3 text-lg sm:text-xl">✓</span> Full Service</li>
-              <li className="flex items-center"><span className="text-orange-600 mr-2 sm:mr-3 text-lg sm:text-xl">✓</span> Priority Support</li>
-              <li className="flex items-center"><span className="text-orange-600 mr-2 sm:mr-3 text-lg sm:text-xl">✓</span> Advanced Features</li>
-              <li className="flex items-center"><span className="text-orange-600 mr-2 sm:mr-3 text-lg sm:text-xl">✓</span> 3 Month Support</li>
+              <li className="flex items-center"><span className="text-orange-600 mr-2 sm:mr-3 text-lg sm:text-xl">âœ“</span> Full Service</li>
+              <li className="flex items-center"><span className="text-orange-600 mr-2 sm:mr-3 text-lg sm:text-xl">âœ“</span> Priority Support</li>
+              <li className="flex items-center"><span className="text-orange-600 mr-2 sm:mr-3 text-lg sm:text-xl">âœ“</span> Advanced Features</li>
+              <li className="flex items-center"><span className="text-orange-600 mr-2 sm:mr-3 text-lg sm:text-xl">âœ“</span> 3 Month Support</li>
             </ul>
             <button className="w-full bg-orange-600 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded-lg transition-colors text-sm sm:text-base">Choose Standard</button>
           </div>
@@ -146,10 +146,10 @@ export default function OurServices() {
           <div className="bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-900 rounded-lg sm:rounded-xl p-4 sm:p-6 md:p-8 border border-gray-300 dark:border-gray-700">
             <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-gray-900 dark:text-white mb-4 sm:mb-6">Premium Plan</h3>
             <ul className="space-y-2 sm:space-y-3 text-xs sm:text-sm md:text-base text-gray-700 dark:text-gray-300 mb-6 sm:mb-8">
-              <li className="flex items-center"><span className="text-orange-500 mr-2 sm:mr-3 text-lg sm:text-xl">✓</span> All Services</li>
-              <li className="flex items-center"><span className="text-orange-500 mr-2 sm:mr-3 text-lg sm:text-xl">✓</span> 24/7 Support</li>
-              <li className="flex items-center"><span className="text-orange-500 mr-2 sm:mr-3 text-lg sm:text-xl">✓</span> Custom Solutions</li>
-              <li className="flex items-center"><span className="text-orange-500 mr-2 sm:mr-3 text-lg sm:text-xl">✓</span> Unlimited Support</li>
+              <li className="flex items-center"><span className="text-orange-500 mr-2 sm:mr-3 text-lg sm:text-xl">âœ“</span> All Services</li>
+              <li className="flex items-center"><span className="text-orange-500 mr-2 sm:mr-3 text-lg sm:text-xl">âœ“</span> 24/7 Support</li>
+              <li className="flex items-center"><span className="text-orange-500 mr-2 sm:mr-3 text-lg sm:text-xl">âœ“</span> Custom Solutions</li>
+              <li className="flex items-center"><span className="text-orange-500 mr-2 sm:mr-3 text-lg sm:text-xl">âœ“</span> Unlimited Support</li>
             </ul>
             <button className="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded-lg transition-colors text-sm sm:text-base">Choose Premium</button>
           </div>
@@ -158,3 +158,4 @@ export default function OurServices() {
     </div>
   );
 }
+

@@ -1,9 +1,14 @@
 // import React from 'react';
-import { useLoaderData } from 'react-router-dom';
 import { Github as GithubIcon, Star, GitFork, Eye } from 'lucide-react';
 
-function Github() {
-    const data = useLoaderData(); // This will fetch the data using the loader
+function Github({ data }) {
+    if (!data) {
+        return (
+            <div className="min-h-screen flex items-center justify-center px-4">
+                <p className="text-lg font-semibold text-gray-700 dark:text-gray-300">Unable to load GitHub data.</p>
+            </div>
+        );
+    }
 
     return (
         <div className='min-h-screen bg-gradient-to-b from-white via-blue-50 to-cyan-50 dark:from-slate-900 dark:via-purple-900 dark:to-slate-900 py-6 sm:py-10 md:py-14 lg:py-20 px-3 sm:px-4 md:px-6 lg:px-8'>

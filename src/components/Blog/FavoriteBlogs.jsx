@@ -1,5 +1,5 @@
-import { useMemo, useState } from "react";
-import { Link } from "react-router-dom";
+﻿import { useMemo, useState } from "react";
+import { Link } from "@router";
 import { ArrowLeft, Bookmark, Calendar, Heart } from "lucide-react";
 import { formatDisplayDate, getBookmarkedPostIds, getLikedPostIds, getStoredPosts } from "./blogStorage";
 
@@ -90,3 +90,4 @@ export default function FavoriteBlogs() {
     </div>
   );
 }
+

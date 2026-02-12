@@ -1,5 +1,5 @@
-import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+﻿import { useState } from 'react'
+import { useNavigate } from '@router'
 import { Mail, Lock, User, Building2, Briefcase, Apple, Github } from 'lucide-react'
 
 const OWNER_ADMIN_EMAIL = 'muhammadyousaf5482@gmail.com'
@@ -144,7 +144,7 @@ export default function Login() {
                     name="password"
                     value={formData.password}
                     onChange={handleInputChange}
-                    placeholder="••••••••"
+                    placeholder="â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢"
                     required
                     className="w-full pl-10 pr-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:border-orange-500 focus:ring-2 focus:ring-orange-200 dark:focus:ring-orange-900 outline-none transition"
                   />
@@ -325,7 +325,7 @@ export default function Login() {
                     name="password"
                     value={formData.password}
                     onChange={handleInputChange}
-                    placeholder="••••••••"
+                    placeholder="â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢"
                     required
                     className="w-full pl-10 pr-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:border-orange-500 focus:ring-2 focus:ring-orange-200 dark:focus:ring-orange-900 outline-none transition"
                   />
@@ -344,7 +344,7 @@ export default function Login() {
                     name="confirmPassword"
                     value={formData.confirmPassword}
                     onChange={handleInputChange}
-                    placeholder="••••••••"
+                    placeholder="â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢"
                     required
                     className="w-full pl-10 pr-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:border-orange-500 focus:ring-2 focus:ring-orange-200 dark:focus:ring-orange-900 outline-none transition"
                   />
@@ -426,3 +426,4 @@ export default function Login() {
     </div>
   )
 }
+

@@ -1,18 +1,17 @@
-/* eslint-disable react/no-unescaped-entities */
+﻿/* eslint-disable react/no-unescaped-entities */
 import { useState, useEffect } from 'react'
-import { useSearchParams } from 'react-router-dom'
+import { useSearchParams } from '@router'
 import { Mail, Phone, MapPin, Send } from 'lucide-react'
 import emailjs from '@emailjs/browser'
 
-// Initialize EmailJS using Vite environment variables (exposed via `import.meta.env`)
-// See .env.example for variable names
-const PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY || import.meta.env.EMAILJS_PUBLIC_KEY || 'YOUR_PUBLIC_KEY';
+// Initialize EmailJS using Next.js public environment variables.
+const PUBLIC_KEY = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || "YOUR_PUBLIC_KEY";
 emailjs.init(PUBLIC_KEY);
 
 const EMAILJS_CONFIG = {
-    serviceId: import.meta.env.VITE_EMAILJS_SERVICE_ID || import.meta.env.EMAILJS_SERVICE_ID || 'YOUR_SERVICE_ID_HERE',
-    templateId: import.meta.env.VITE_EMAILJS_TEMPLATE_ID || import.meta.env.EMAILJS_TEMPLATE_ID || 'YOUR_TEMPLATE_ID',
-    receiverEmail: import.meta.env.VITE_RECEIVER_EMAIL || import.meta.env.RECEIVER_EMAIL || 'your-email@example.com'
+    serviceId: process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || 'YOUR_SERVICE_ID_HERE',
+    templateId: process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID || 'YOUR_TEMPLATE_ID',
+    receiverEmail: process.env.NEXT_PUBLIC_RECEIVER_EMAIL || 'your-email@example.com'
 };
 
 export default function Contact() {
@@ -198,14 +197,14 @@ Thank you!
                     {submitStatus === 'success' && (
                         <div className="mb-6 p-4 sm:p-6 bg-gradient-to-r from-green-100 to-emerald-100 dark:from-green-500/20 dark:to-emerald-500/20 border border-green-300 dark:border-green-500/50 rounded-lg">
                             <p className="text-green-900 dark:text-green-300 font-bold flex items-center gap-2">
-                                <span className="text-2xl">✓</span> Message sent successfully! We'll get back to you soon.
+                                <span className="text-2xl">âœ“</span> Message sent successfully! We'll get back to you soon.
                             </p>
                         </div>
                     )}
                     {submitStatus === 'error' && (
                         <div className="mb-6 p-4 sm:p-6 bg-gradient-to-r from-red-100 to-rose-100 dark:from-red-500/20 dark:to-rose-500/20 border border-red-300 dark:border-red-500/50 rounded-lg">
                             <p className="text-red-900 dark:text-red-300 font-bold flex items-center gap-2">
-                                <span className="text-2xl">✕</span> Error sending message. Please try again.
+                                <span className="text-2xl">âœ•</span> Error sending message. Please try again.
                             </p>
                         </div>
                     )}
@@ -215,7 +214,7 @@ Thank you!
                         {formData.service && (
                             <div className="mb-8 p-4 sm:p-6 bg-gradient-to-r from-orange-100 to-pink-100 dark:from-orange-500/20 dark:to-pink-500/20 border border-orange-300 dark:border-orange-500/50 rounded-lg">
                                 <p className="text-orange-900 dark:text-white font-bold mb-3 flex items-center gap-2">
-                                    <span className="text-orange-600 dark:text-orange-400">✓</span> Service Selected
+                                    <span className="text-orange-600 dark:text-orange-400">âœ“</span> Service Selected
                                 </p>
                                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 text-sm">
                                     <div className="text-orange-800 dark:text-gray-300"><span className="text-orange-700 dark:text-gray-400 font-semibold">Service:</span> {formData.service}</div>
@@ -293,7 +292,7 @@ Thank you!
                         >
                             {isLoading ? (
                                 <>
-                                    <span className="animate-spin">⏳</span>
+                                    <span className="animate-spin">â³</span>
                                     Sending...
                                 </>
                             ) : (
@@ -309,3 +308,4 @@ Thank you!
         </div>
     );
 }
+
