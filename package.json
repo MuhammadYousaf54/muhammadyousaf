@@ -8,13 +8,15 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "connect-db": "node server/connect.js"
+    "connect-db": "node server/connect.js",
+    "postbuild": "node scripts/generate-sitemap.mjs"
   },
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
     "dotenv": "^16.6.1",
     "lucide-react": "^0.452.0",
     "mongoose": "^7.8.9",
+    "next-sitemap": "^4.2.3",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-icon": "^1.0.0",
