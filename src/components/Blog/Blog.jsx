@@ -1,4 +1,4 @@
-﻿import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Search, Calendar, Clock, User, ArrowRight, Bookmark, Eye, MessageCircle, Shield, Heart } from "lucide-react";
 import { Link, useNavigate } from "@router";
 import {
@@ -8,23 +8,46 @@ import {
   getLikedPostIds,
   getStoredPosts,
   isAdminUser,
+  likePost,
+  markPostLiked,
   normalizeCategory,
-  savePosts,
   toggleBookmarkPost,
-  toggleLikePost,
+  incrementPostView,
 } from "./blogStorage";
 
 export default function Blog() {
   const navigate = useNavigate();
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [searchQuery, setSearchQuery] = useState("");
-  const [posts, setPosts] = useState(() => getStoredPosts());
+  const [posts, setPosts] = useState([]);
   const [bookmarkedIds, setBookmarkedIds] = useState(() => getBookmarkedPostIds());
   const [likedIds, setLikedIds] = useState(() => getLikedPostIds());
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState("");
 
   const allCategories = useMemo(() => ["All", ...categories], []);
   const admin = isAdminUser();
   const favoriteCount = useMemo(() => new Set([...likedIds, ...bookmarkedIds]).size, [likedIds, bookmarkedIds]);
+
+  useEffect(() => {
+    let mounted = true;
+    const loadPosts = async () => {
+      try {
+        setIsLoading(true);
+        setError("");
+        const nextPosts = await getStoredPosts({ published: true });
+        if (mounted) setPosts(nextPosts);
+      } catch (err) {
+        if (mounted) setError(err.message || "Failed to load blog posts.");
+      } finally {
+        if (mounted) setIsLoading(false);
+      }
+    };
+    loadPosts();
+    return () => {
+      mounted = false;
+    };
+  }, []);
 
   const filteredPosts = useMemo(
     () =>
@@ -52,17 +75,26 @@ export default function Blog() {
     setBookmarkedIds(next);
   };
 
-  const openPost = (postId) => {
-    const nextPosts = posts.map((post) => (post.id === postId ? { ...post, views: (post.views || 0) + 1 } : post));
-    setPosts(nextPosts);
-    savePosts(nextPosts);
-    navigate(`/blog/${postId}`);
+  const openPost = async (postId) => {
+    try {
+      const updated = await incrementPostView(postId);
+      setPosts((prev) => prev.map((post) => (post._id === updated._id ? updated : post)));
+    } catch (err) {
+      console.error("View tracking failed:", err);
+    } finally {
+      navigate(`/blog/${postId}`);
+    }
   };
 
-  const likePost = (postId) => {
-    const { nextPosts, nextLikedIds } = toggleLikePost(postId, posts);
-    setPosts(nextPosts);
-    setLikedIds(nextLikedIds);
+  const likeArticle = async (postId) => {
+    try {
+      const updated = await likePost(postId);
+      setPosts((prev) => prev.map((post) => (post._id === updated._id ? updated : post)));
+      const nextLikedIds = markPostLiked(postId);
+      setLikedIds(nextLikedIds);
+    } catch (err) {
+      console.error("Like failed:", err);
+    }
   };
 
   return (
@@ -156,7 +188,7 @@ export default function Blog() {
                     </div>
                   </div>
                   <button
-                    onClick={() => openPost(featuredPost.id)}
+                    onClick={() => openPost(featuredPost._id)}
                     className="inline-flex items-center gap-2 bg-white text-purple-600 font-bold px-8 py-3 rounded-lg hover:bg-gray-100 transition-all duration-300 transform hover:scale-105"
                   >
                     Read Article
@@ -176,10 +208,18 @@ export default function Blog() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filteredPosts.length > 0 ? (
+          {isLoading ? (
+            <div className="col-span-full text-center py-12">
+              <p className="text-gray-600 dark:text-gray-400 text-lg">Loading blog posts...</p>
+            </div>
+          ) : error ? (
+            <div className="col-span-full text-center py-12">
+              <p className="text-red-600 dark:text-red-400 text-lg">{error}</p>
+            </div>
+          ) : filteredPosts.length > 0 ? (
             filteredPosts.map((post) => (
               <article
-                key={post.id}
+                key={post._id}
                 className="group bg-white dark:bg-slate-800 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border border-gray-200 dark:border-slate-700"
               >
                 <div className="h-40 sm:h-48 bg-gradient-to-br from-orange-50 to-pink-50 dark:from-slate-700 dark:to-slate-600 p-6">
@@ -233,15 +273,15 @@ export default function Blog() {
 
                   <div className="flex flex-wrap sm:flex-nowrap gap-2">
                     <button
-                      onClick={() => openPost(post.id)}
+                      onClick={() => openPost(post._id)}
                       className="flex-1 bg-gradient-to-r from-orange-500 to-pink-500 hover:from-orange-600 hover:to-pink-600 text-white font-bold py-2 rounded-lg transition-all transform hover:scale-105 text-sm"
                     >
                       Read More
                     </button>
                     <button
-                      onClick={() => toggleBookmark(post.id)}
+                      onClick={() => toggleBookmark(post._id)}
                       className={`px-3 py-2 border-2 rounded-lg transition-colors ${
-                        bookmarkedIds.includes(post.id)
+                        bookmarkedIds.includes(post._id)
                           ? "border-orange-500 text-orange-500"
                           : "border-gray-300 dark:border-slate-600 text-gray-700 dark:text-gray-300 hover:border-orange-500 dark:hover:border-orange-400"
                       }`}
@@ -250,9 +290,9 @@ export default function Blog() {
                       <Bookmark size={18} />
                     </button>
                     <button
-                      onClick={() => likePost(post.id)}
+                      onClick={() => likeArticle(post._id)}
                       className={`px-3 py-2 border-2 rounded-lg transition-colors ${
-                        likedIds.includes(post.id)
+                        likedIds.includes(post._id)
                           ? "border-pink-500 bg-pink-50 dark:bg-pink-950/20 text-pink-600"
                           : "border-pink-300 text-pink-500 hover:border-pink-500"
                       }`}
@@ -274,4 +314,3 @@ export default function Blog() {
     </div>
   );
 }
-

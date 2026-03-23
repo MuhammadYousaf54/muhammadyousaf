@@ -1,0 +1,63 @@
+export const categories = [
+  "AI & Technology",
+  "Web Development",
+  "Automation",
+  "Data Science",
+  "Marketing",
+  "Career",
+  "General",
+];
+
+export const defaultBlogPosts = [
+  {
+    title: "The Future of Web Development: AI-Powered Code Generation",
+    excerpt: "Explore how artificial intelligence is transforming the way developers write and maintain code.",
+    content:
+      "Artificial intelligence is changing how teams write, test, and ship software. Modern tooling now assists with scaffolding components, writing tests, and catching errors before production. Teams that use AI effectively still rely on architecture discipline, code reviews, and clear ownership. AI improves speed, but engineering judgment remains the core advantage.",
+    category: "AI & Technology",
+    author: "Muhammad Yousaf",
+    date: "2026-02-10",
+    readTime: "8 min read",
+    image: "rocket",
+    featured: true,
+    published: true,
+    views: 1250,
+    likes: 324,
+    comments: 42,
+    commentsList: [],
+  },
+  {
+    title: "Building Scalable React Applications with Best Practices",
+    excerpt: "Learn proven strategies for structuring large React applications with better maintainability.",
+    content:
+      "Scalable React applications begin with clear boundaries and reusable patterns. Separate presentational and container concerns where useful, keep data flows explicit, and avoid over-centralized global state. Prefer composition over inheritance and enforce consistent coding standards with linting and PR review checklists.",
+    category: "Web Development",
+    author: "Muhammad Yousaf",
+    date: "2026-02-08",
+    readTime: "12 min read",
+    image: "atom",
+    featured: false,
+    published: true,
+    views: 892,
+    likes: 215,
+    comments: 28,
+    commentsList: [],
+  },
+  {
+    title: "Automating Business Workflows with No-Code Solutions",
+    excerpt: "Discover how businesses can streamline operations using no-code and low-code platforms.",
+    content:
+      "No-code tools can automate approvals, lead routing, and reporting quickly. The key is selecting workflows with clear inputs and stable rules. For mission-critical operations, define fallback paths and audit logs. A hybrid model that combines no-code speed with engineer-owned integrations usually delivers the best long-term results.",
+    category: "Automation",
+    author: "Muhammad Yousaf",
+    date: "2026-02-05",
+    readTime: "10 min read",
+    image: "settings",
+    featured: false,
+    published: true,
+    views: 756,
+    likes: 189,
+    comments: 35,
+    commentsList: [],
+  },
+];

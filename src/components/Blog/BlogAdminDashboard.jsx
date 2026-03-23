@@ -1,7 +1,16 @@
-﻿import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Link, Navigate } from "@router";
 import { Pencil, Trash2, PlusCircle, ArrowLeft } from "lucide-react";
-import { categories, createPostId, estimateReadTime, getStoredPosts, isAdminUser, normalizeCategory, savePosts } from "./blogStorage";
+import {
+  categories,
+  createPost,
+  deletePost,
+  estimateReadTime,
+  getStoredPosts,
+  isAdminUser,
+  normalizeCategory,
+  updatePost,
+} from "./blogStorage";
 
 const emptyForm = {
   title: "",
@@ -16,13 +25,33 @@ const emptyForm = {
 
 export default function BlogAdminDashboard() {
   const admin = isAdminUser();
-  const [posts, setPosts] = useState(() => getStoredPosts().sort((a, b) => new Date(b.date) - new Date(a.date)));
+  const [posts, setPosts] = useState([]);
   const [form, setForm] = useState(emptyForm);
   const [editingId, setEditingId] = useState(null);
   const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
 
   const totalViews = useMemo(() => posts.reduce((sum, post) => sum + (post.views || 0), 0), [posts]);
   const publishedCount = useMemo(() => posts.filter((post) => post.published).length, [posts]);
+
+  useEffect(() => {
+    let mounted = true;
+    const loadPosts = async () => {
+      try {
+        setIsLoading(true);
+        const data = await getStoredPosts({ published: false });
+        if (mounted) setPosts(data.sort((a, b) => new Date(b.date) - new Date(a.date)));
+      } catch (err) {
+        if (mounted) setError(err.message || "Failed to load posts.");
+      } finally {
+        if (mounted) setIsLoading(false);
+      }
+    };
+    loadPosts();
+    return () => {
+      mounted = false;
+    };
+  }, []);
 
   if (!admin) {
     return <Navigate to="/blog" replace />;
@@ -48,7 +77,7 @@ export default function BlogAdminDashboard() {
     return "";
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const validationError = validate();
     if (validationError) {
@@ -56,7 +85,6 @@ export default function BlogAdminDashboard() {
       return;
     }
 
-    const existingPost = editingId ? posts.find((post) => post.id === editingId) : null;
     const payload = {
       ...form,
       title: form.title.trim(),
@@ -65,23 +93,25 @@ export default function BlogAdminDashboard() {
       author: form.author.trim(),
       category: normalizeCategory(form.category),
       readTime: estimateReadTime(form.content),
-      likes: existingPost?.likes || 0,
-      views: existingPost?.views || 0,
-      commentsList: existingPost?.commentsList || [],
-      comments: existingPost?.commentsList?.length || existingPost?.comments || 0,
     };
 
-    const nextPosts = editingId
-      ? posts.map((post) => (post.id === editingId ? { ...post, ...payload } : post))
-      : [{ id: createPostId(), ...payload }, ...posts];
-
-    setPosts(nextPosts);
-    savePosts(nextPosts);
-    resetForm();
+    try {
+      setError("");
+      if (editingId) {
+        const updated = await updatePost(editingId, payload);
+        setPosts((prev) => prev.map((post) => (post._id === updated._id ? updated : post)));
+      } else {
+        const created = await createPost(payload);
+        setPosts((prev) => [created, ...prev]);
+      }
+      resetForm();
+    } catch (err) {
+      setError(err.message || "Failed to save blog post.");
+    }
   };
 
   const onEdit = (post) => {
-    setEditingId(post.id);
+    setEditingId(post._id);
     setForm({
       title: post.title,
       excerpt: post.excerpt,
@@ -95,12 +125,16 @@ export default function BlogAdminDashboard() {
     setError("");
   };
 
-  const onDelete = (postId) => {
+  const onDelete = async (postId) => {
     if (!window.confirm("Delete this blog post?")) return;
-    const nextPosts = posts.filter((post) => post.id !== postId);
-    setPosts(nextPosts);
-    savePosts(nextPosts);
-    if (editingId === postId) resetForm();
+    try {
+      await deletePost(postId);
+      const nextPosts = posts.filter((post) => post._id !== postId);
+      setPosts(nextPosts);
+      if (editingId === postId) resetForm();
+    } catch (err) {
+      setError(err.message || "Failed to delete post.");
+    }
   };
 
   const renderFieldLabel = (label) => <label className="block text-sm font-semibold text-gray-800 dark:text-gray-100 mb-1">{label}</label>;
@@ -116,7 +150,7 @@ export default function BlogAdminDashboard() {
             </Link>
             <h1 className="text-2xl sm:text-3xl font-black text-gray-900 dark:text-white">Blog Admin Dashboard</h1>
             <p className="text-sm sm:text-base text-gray-600 dark:text-gray-300 mt-1">
-              Manage your blog posts manually.
+              Manage your blog posts with MongoDB.
             </p>
           </div>
           <div className="bg-white dark:bg-slate-800 rounded-xl border border-gray-200 dark:border-slate-700 p-4 shadow-sm w-full sm:w-auto">
@@ -241,11 +275,13 @@ export default function BlogAdminDashboard() {
           <section className="bg-white dark:bg-slate-800 rounded-2xl p-4 sm:p-6 border border-gray-200 dark:border-slate-700 shadow-sm">
             <h2 className="text-xl font-black text-gray-900 dark:text-white mb-4">Existing Posts</h2>
             <div className="space-y-3 max-h-[70vh] overflow-auto pr-1 sm:pr-2">
-              {posts.length === 0 ? (
+              {isLoading ? (
+                <p className="text-gray-600 dark:text-gray-300">Loading posts...</p>
+              ) : posts.length === 0 ? (
                 <p className="text-gray-600 dark:text-gray-300">No posts yet.</p>
               ) : (
                 posts.map((post) => (
-                  <div key={post.id} className="border border-gray-200 dark:border-slate-700 rounded-xl p-4">
+                  <div key={post._id} className="border border-gray-200 dark:border-slate-700 rounded-xl p-4">
                     <div className="flex items-start justify-between gap-3">
                       <div className="min-w-0">
                         <h3 className="font-bold text-gray-900 dark:text-white truncate">{post.title}</h3>
@@ -273,7 +309,7 @@ export default function BlogAdminDashboard() {
                           <Pencil size={16} />
                         </button>
                         <button
-                          onClick={() => onDelete(post.id)}
+                          onClick={() => onDelete(post._id)}
                           className="p-2 rounded-lg border border-red-200 text-red-600"
                           title="Delete"
                         >
@@ -291,4 +327,3 @@ export default function BlogAdminDashboard() {
     </div>
   );
 }
-

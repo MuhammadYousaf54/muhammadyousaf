@@ -1,280 +1,260 @@
-﻿// import React from 'react';
-import { useParams, useNavigate } from '@router';
-import { Code, Zap, TrendingUp, BarChart3, Mail, Phone, MessageCircle } from 'lucide-react';
-import ProjectCard from '../ProjectCard/ProjectCard';
+import { useNavigate, useParams } from "@router";
+import { BarChart3, Code, Mail, MessageCircle, Phone, TrendingUp, Zap } from "lucide-react";
+import ProjectCard from "../ProjectCard/ProjectCard";
 
 export default function ServiceDetail() {
   const params = useParams();
   const serviceId = params?.serviceId;
   const navigate = useNavigate();
 
-  const handleGetStarted = (planName, price) => {
-    const serviceName = serviceData[serviceId]?.title || 'Service';
-    navigate(`/contact?service=${serviceName}&plan=${planName}&price=${price}`);
-  };
-
   const serviceData = {
-    'web-development': {
-      title: 'Web Development & Hosting',
+    "web-development": {
+      title: "Web Development & Hosting",
       icon: <Code size={80} className="text-orange-500" />,
-      fullDescription: 'Build scalable, responsive websites and web applications with modern technologies. We handle everything from design to deployment and hosting.',
-      techStack: ['React', 'Next.js', 'Node.js', 'Express', 'MongoDB', 'Tailwind CSS', 'Vite', 'HTML5', 'CSS3', 'JavaScript', 'TypeScript', 'Webpack'],
+      fullDescription:
+        "Build scalable, responsive websites and web applications with modern technologies. From business websites to CRM platforms and dashboards, everything is designed to work smoothly across mobile, tablet, and desktop.",
+      techStack: ["React", "Next.js", "Node.js", "Express", "MongoDB", "Tailwind CSS", "Vite", "HTML5", "CSS3", "JavaScript", "TypeScript", "Webpack"],
       projects: [
         {
-          title: 'E-Commerce Web App',
-          description: 'A full-featured e-commerce platform with payment integration and inventory management.',
-          link: '#',
-          image: ''
+          title: "Custom CRM Platform",
+          description: "Fully functional CRM with lead tracking, pipeline stages, reminders, reporting, and team permissions.",
+          link: "/contact?service=Web+Development&project=Custom+CRM+Platform",
+          image: "",
+          icon: "CRM",
         },
         {
-          title: 'Chat Application',
-          description: 'Real-time chat application with WebSocket integration and user authentication.',
-          link: '#',
-          image: ''
+          title: "Logistics App with Real-Time GPS",
+          description: "Logistics system with shipment updates, dispatch management, and real-time GPS tracking.",
+          link: "/contact?service=Web+Development&project=Logistics+App+with+GPS",
+          image: "",
+          icon: "GPS",
         },
         {
-          title: 'Cloud Native App',
-          description: 'Deployed a cloud-native app on Kubernetes for scalability and resilience.',
-          link: '#',
-          image: ''
-        }
+          title: "WhatsApp Customer System",
+          description: "Customer communication workflow with WhatsApp support, automation, and lead handling.",
+          link: "/contact?service=Web+Development&project=WhatsApp+Customer+System",
+          image: "",
+          icon: "WA",
+        },
       ],
-      pricing: { basic: 500, standard: 1200, premium: 2500 }
+      pricing: { starter: 500, growth: 1200, scale: 2500 },
     },
-    'ai-automation': {
-      title: 'AI Automation & CRM Integration',
+    "ai-automation": {
+      title: "AI Automation & CRM Integration",
       icon: <Zap size={80} className="text-orange-500" />,
-      fullDescription: 'Streamline your business operations with AI-powered automation and seamless CRM integration for better customer relationships.',
-      techStack: ['Python', 'OpenAI API', 'TensorFlow', 'PyTorch', 'Salesforce', 'HubSpot', 'Zapier', 'Make.com', 'Node.js', 'Express', 'MongoDB', 'PostgreSQL'],
+      fullDescription:
+        "Streamline operations with AI-powered automation, CRM integration, lead handling, and support systems that reduce manual work and improve customer response speed.",
+      techStack: ["Python", "OpenAI API", "HubSpot", "Zapier", "Make.com", "Node.js", "Express", "MongoDB", "PostgreSQL", "REST APIs", "Webhooks", "Automation Flows"],
       projects: [
         {
-          title: 'AI Chatbot Integration',
-          description: 'Intelligent chatbot powered by OpenAI GPT for customer support automation.',
-          link: '#',
-          image: ''
+          title: "AI CRM Automation",
+          description: "Lead routing, follow-up triggers, task creation, and CRM lifecycle automation.",
+          link: "/contact?service=AI+Automation&project=AI+CRM+Automation",
+          image: "",
+          icon: "AI",
         },
         {
-          title: 'CRM Automation System',
-          description: 'Custom CRM automation workflows using Zapier and HubSpot integration.',
-          link: '#',
-          image: ''
+          title: "WhatsApp Lead Automation",
+          description: "WhatsApp auto-replies, qualification flows, and CRM sync for sales inquiries.",
+          link: "/contact?service=AI+Automation&project=WhatsApp+Lead+Automation",
+          image: "",
+          icon: "BOT",
         },
         {
-          title: 'Business Process Automation',
-          description: 'End-to-end automation of business processes reducing manual workload by 80%.',
-          link: '#',
-          image: ''
-        }
+          title: "Workflow Automation Suite",
+          description: "Business process automation using APIs, triggers, approvals, and reporting.",
+          link: "/contact?service=AI+Automation&project=Workflow+Automation+Suite",
+          image: "",
+          icon: "API",
+        },
       ],
-      pricing: { basic: 800, standard: 1800, premium: 3500 }
+      pricing: { starter: 800, growth: 1800, scale: 3500 },
     },
-    'digital-marketing': {
-      title: 'Digital Marketing Expert',
+    "digital-marketing": {
+      title: "Digital Marketing",
       icon: <TrendingUp size={80} className="text-orange-500" />,
-      fullDescription: 'Boost your online presence with strategic digital marketing, SEO optimization, social media management, and content creation.',
-      techStack: ['Google Analytics', 'Google Ads', 'Facebook Ads', 'SEO Tools', 'Hootsuite', 'Canva', 'WordPress', 'Mailchimp', 'Content Strategy', 'Social Media', 'Email Marketing', 'SEM'],
+      fullDescription:
+        "Boost online visibility with SEO, campaign planning, content support, reporting dashboards, and growth strategies focused on measurable results.",
+      techStack: ["Google Analytics", "Google Ads", "Meta Ads", "SEO Tools", "Mailchimp", "Content Strategy", "Social Media", "A/B Testing", "Reporting Dashboards", "Performance Tracking"],
       projects: [
         {
-          title: 'SEO Optimization Campaign',
-          description: 'Improved search rankings for e-commerce site, increased organic traffic by 250%.',
-          link: '#',
-          image: ''
+          title: "Social Media Campaign Manager",
+          description: "Campaign planning and scheduling support across multiple channels.",
+          link: "/contact?service=Digital+Marketing&project=Social+Media+Campaign+Manager",
+          image: "",
+          icon: "SM",
         },
         {
-          title: 'Social Media Management',
-          description: 'Complete social media strategy and management across Instagram, Facebook, and LinkedIn.',
-          link: '#',
-          image: ''
+          title: "Email Marketing Automation",
+          description: "Automated campaign flows, segmentation, and nurture sequences.",
+          link: "/contact?service=Digital+Marketing&project=Email+Marketing+Automation",
+          image: "",
+          icon: "EM",
         },
         {
-          title: 'Content Marketing Strategy',
-          description: 'Comprehensive content creation and distribution strategy for brand building.',
-          link: '#',
-          image: ''
-        }
+          title: "SEO Analytics Dashboard",
+          description: "Keyword tracking, performance reporting, and optimization insights.",
+          link: "/contact?service=Digital+Marketing&project=SEO+Analytics+Dashboard",
+          image: "",
+          icon: "SEO",
+        },
       ],
-      pricing: { basic: 600, standard: 1500, premium: 3000 }
+      pricing: { starter: 600, growth: 1500, scale: 3000 },
     },
-    'data-analysis': {
-      title: 'Data Analysis',
+    "data-analysis": {
+      title: "Data Analysis",
       icon: <BarChart3 size={80} className="text-orange-500" />,
-      fullDescription: 'Transform raw data into actionable insights with comprehensive data analysis, visualization, and business intelligence solutions.',
-      techStack: ['Python', 'Pandas', 'NumPy', 'Matplotlib', 'Power BI', 'Tableau', 'SQL', 'Excel', 'R', 'Scikit-learn', 'Jupyter', 'Google Sheets'],
+      fullDescription:
+        "Turn raw data into decisions with clean dashboards, KPI tracking, reporting, forecasting support, and business intelligence systems.",
+      techStack: ["Python", "Pandas", "NumPy", "Power BI", "Tableau", "SQL", "Excel", "Scikit-learn", "Jupyter", "Google Sheets", "Reporting", "Dashboards"],
       projects: [
         {
-          title: 'Sales Data Analytics',
-          description: 'Comprehensive sales data analysis with predictive modeling and forecasting.',
-          link: '#',
-          image: ''
+          title: "Sales Analytics Platform",
+          description: "Sales performance tracking, forecasting, and operational insight reporting.",
+          link: "/contact?service=Data+Analysis&project=Sales+Analytics+Platform",
+          image: "",
+          icon: "SQL",
         },
         {
-          title: 'Customer Segmentation',
-          description: 'Customer behavior analysis and segmentation for targeted marketing strategies.',
-          link: '#',
-          image: ''
+          title: "Financial Dashboard",
+          description: "Revenue, expenses, cash flow, and business metric visualization.",
+          link: "/contact?service=Data+Analysis&project=Financial+Dashboard",
+          image: "",
+          icon: "FIN",
         },
         {
-          title: 'Business Intelligence Dashboard',
-          description: 'Interactive dashboard with real-time KPI tracking and data visualization.',
-          link: '#',
-          image: ''
-        }
+          title: "Business Intelligence Platform",
+          description: "Interactive KPI dashboards and decision-support reporting systems.",
+          link: "/contact?service=Data+Analysis&project=Business+Intelligence+Platform",
+          image: "",
+          icon: "BI",
+        },
       ],
-      pricing: { basic: 700, standard: 1600, premium: 2800 }
-    }
+      pricing: { starter: 700, growth: 1600, scale: 2800 },
+    },
   };
 
   const service = serviceData[serviceId];
 
+  const handleGetStarted = (planName, price) => {
+    const serviceName = serviceData[serviceId]?.title || "Service";
+    navigate(`/contact?service=${serviceName}&plan=${planName}&price=${price}`);
+  };
+
   if (!service) {
     return (
-      <div className="mx-auto w-full max-w-7xl px-4 py-12 min-h-screen bg-gradient-to-b from-white to-gray-50 dark:from-gray-900 dark:to-black transition-colors text-center">
+      <div className="mx-auto min-h-screen w-full max-w-7xl bg-gradient-to-b from-white to-gray-50 px-4 py-12 text-center transition-colors dark:from-gray-900 dark:to-black">
         <h1 className="text-4xl font-bold text-gray-900 dark:text-white">Service not found</h1>
       </div>
     );
   }
 
   return (
-    <div className="mx-auto w-full max-w-7xl px-4 py-12 min-h-screen bg-gradient-to-b from-white to-gray-50 dark:from-gray-900 dark:to-black transition-colors">
-      {/* Hero Section */}
-      <div className="flex flex-col items-center justify-center mb-16 bg-white dark:bg-gray-900 rounded-lg shadow-lg p-12 border border-gray-200 dark:border-gray-800">
-        <div className="flex justify-center mb-6">
-          {service.icon}
-        </div>
-        <h1 className="text-5xl font-bold font-serif text-center text-gray-900 dark:text-white mb-6">
-          {service.title}
-        </h1>
-        <p className="text-xl text-center text-gray-700 dark:text-gray-300 max-w-3xl leading-relaxed">
-          {service.fullDescription}
-        </p>
+    <div className="mx-auto min-h-screen w-full max-w-7xl bg-gradient-to-b from-white to-gray-50 px-3 py-8 transition-colors dark:from-gray-900 dark:to-black sm:px-4 sm:py-12 lg:px-6">
+      <div className="mb-8 flex flex-col items-center justify-center rounded-lg border border-gray-200 bg-white p-5 shadow-lg dark:border-gray-800 dark:bg-gray-900 sm:mb-12 sm:p-8 md:mb-16 md:p-12">
+        <div className="mb-6 flex justify-center">{service.icon}</div>
+        <h1 className="mb-4 text-center font-serif text-3xl font-bold text-gray-900 dark:text-white sm:text-4xl md:mb-6 md:text-5xl">{service.title}</h1>
+        <p className="max-w-3xl text-center text-base leading-relaxed text-gray-700 dark:text-gray-300 sm:text-lg md:text-xl">{service.fullDescription}</p>
       </div>
 
-      {/* Tech Stack Section */}
-      <div className="mb-16 bg-white dark:bg-gray-900 rounded-lg shadow-lg p-12 border border-gray-200 dark:border-gray-800">
-        <h2 className="text-4xl font-bold font-serif text-center text-gray-900 dark:text-white mb-12">
+      <div className="mb-8 rounded-lg border border-gray-200 bg-white p-5 shadow-lg dark:border-gray-800 dark:bg-gray-900 sm:mb-12 sm:p-8 md:mb-16 md:p-12">
+        <h2 className="mb-8 text-center font-serif text-2xl font-bold text-gray-900 dark:text-white sm:mb-12 sm:text-3xl md:text-4xl">
           Tech <span className="text-orange-500 dark:text-orange-400">Stack</span>
         </h2>
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-3 md:gap-6 lg:grid-cols-4">
           {service.techStack.map((tech, index) => (
-            <div 
+            <div
               key={index}
-              className="bg-gradient-to-br from-orange-50 to-orange-100 dark:from-gray-800 dark:to-gray-700 rounded-lg p-6 text-center border border-orange-200 dark:border-gray-600 hover:shadow-lg transition-shadow"
+              className="rounded-lg border border-orange-200 bg-gradient-to-br from-orange-50 to-orange-100 p-3 text-center transition-shadow hover:shadow-lg dark:border-gray-600 dark:from-gray-800 dark:to-gray-700 sm:p-5 md:p-6"
             >
-              <p className="font-semibold text-gray-900 dark:text-white text-lg">{tech}</p>
+              <p className="text-sm font-semibold text-gray-900 dark:text-white sm:text-base md:text-lg">{tech}</p>
             </div>
           ))}
         </div>
       </div>
 
-      {/* Projects Section */}
-      <div className="mb-16 bg-white dark:bg-gray-900 rounded-lg shadow-lg p-12 border border-gray-200 dark:border-gray-800">
-        <h2 className="text-4xl font-bold font-serif text-center text-gray-900 dark:text-white mb-12">
+      <div className="mb-8 rounded-lg border border-gray-200 bg-white p-5 shadow-lg dark:border-gray-800 dark:bg-gray-900 sm:mb-12 sm:p-8 md:mb-16 md:p-12">
+        <h2 className="mb-8 text-center font-serif text-2xl font-bold text-gray-900 dark:text-white sm:mb-12 sm:text-3xl md:text-4xl">
           Related <span className="text-orange-500 dark:text-orange-400">Projects</span>
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 lg:grid-cols-3 lg:gap-8">
           {service.projects.map((project, index) => (
-            <ProjectCard
-              key={index}
-              title={project.title}
-              description={project.description}
-              link={project.link}
-              image={project.image}
-            />
+            <ProjectCard key={index} title={project.title} description={project.description} link={project.link} image={project.image} icon={project.icon} />
           ))}
         </div>
       </div>
 
-      {/* Pricing Section */}
-      <div className="mb-16 bg-white dark:bg-gray-900 rounded-lg shadow-lg p-12 border border-gray-200 dark:border-gray-800">
-        <h2 className="text-4xl font-bold font-serif text-center text-gray-900 dark:text-white mb-12">
+      <div className="mb-8 rounded-lg border border-gray-200 bg-white p-5 shadow-lg dark:border-gray-800 dark:bg-gray-900 sm:mb-12 sm:p-8 md:mb-16 md:p-12">
+        <h2 className="mb-8 text-center font-serif text-2xl font-bold text-gray-900 dark:text-white sm:mb-12 sm:text-3xl md:text-4xl">
           Service <span className="text-orange-500 dark:text-orange-400">Pricing</span>
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {/* Basic Plan */}
-          <div className="bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-900 rounded-lg shadow-lg p-8 border border-gray-200 dark:border-gray-700 hover:shadow-xl transition-shadow">
-            <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">Basic</h3>
-            <p className="text-gray-600 dark:text-gray-300 mb-6">Perfect for getting started</p>
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-3 md:gap-6 lg:gap-8">
+          <div className="rounded-lg border border-gray-200 bg-gradient-to-br from-gray-50 to-gray-100 p-5 shadow-lg transition-shadow hover:shadow-xl dark:border-gray-700 dark:from-gray-800 dark:to-gray-900 sm:p-6 md:p-8">
+            <h3 className="mb-2 text-xl font-bold text-gray-900 dark:text-white sm:text-2xl">Starter</h3>
+            <p className="mb-6 text-gray-600 dark:text-gray-300">Best for smaller websites and simple launches.</p>
             <div className="mb-8">
-              <span className="text-4xl font-bold text-orange-500">${service.pricing.basic}</span>
+              <span className="text-4xl font-bold text-orange-500">${service.pricing.starter}</span>
               <span className="text-gray-600 dark:text-gray-400">/month</span>
             </div>
-            <button onClick={() => handleGetStarted('Basic', service.pricing.basic)} className="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 px-4 rounded-lg transition-colors mb-4">Get Started</button>
+            <button onClick={() => handleGetStarted("Starter", service.pricing.starter)} className="mb-4 w-full rounded-lg bg-orange-500 px-4 py-3 font-bold text-white transition-colors hover:bg-orange-600">
+              Get Started
+            </button>
           </div>
 
-          {/* Standard Plan */}
-          <div className="bg-gradient-to-br from-orange-50 to-orange-100 dark:from-gray-700 dark:to-gray-800 rounded-lg shadow-lg p-8 border-2 border-orange-500 hover:shadow-xl transition-shadow transform scale-105">
-            <div className="bg-orange-500 text-white text-center py-2 rounded-lg mb-4 font-bold">POPULAR</div>
-            <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">Standard</h3>
-            <p className="text-gray-600 dark:text-gray-300 mb-6">Most popular choice</p>
+          <div className="rounded-lg border-2 border-orange-500 bg-gradient-to-br from-orange-50 to-orange-100 p-5 shadow-lg transition-shadow hover:shadow-xl dark:from-gray-700 dark:to-gray-800 sm:p-6 md:p-8 lg:scale-105">
+            <div className="mb-4 rounded-lg bg-orange-500 py-2 text-center font-bold text-white">POPULAR</div>
+            <h3 className="mb-2 text-xl font-bold text-gray-900 dark:text-white sm:text-2xl">Growth</h3>
+            <p className="mb-6 text-gray-600 dark:text-gray-300">Perfect for CRM systems and integrated products.</p>
             <div className="mb-8">
-              <span className="text-4xl font-bold text-orange-600">${service.pricing.standard}</span>
+              <span className="text-4xl font-bold text-orange-600">${service.pricing.growth}</span>
               <span className="text-gray-600 dark:text-gray-400">/month</span>
             </div>
-            <button onClick={() => handleGetStarted('Standard', service.pricing.standard)} className="w-full bg-orange-600 hover:bg-orange-700 text-white font-bold py-3 px-4 rounded-lg transition-colors mb-4">Get Started</button>
+            <button onClick={() => handleGetStarted("Growth", service.pricing.growth)} className="mb-4 w-full rounded-lg bg-orange-600 px-4 py-3 font-bold text-white transition-colors hover:bg-orange-700">
+              Get Started
+            </button>
           </div>
 
-          {/* Premium Plan */}
-          <div className="bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-900 rounded-lg shadow-lg p-8 border border-gray-200 dark:border-gray-700 hover:shadow-xl transition-shadow">
-            <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">Premium</h3>
-            <p className="text-gray-600 dark:text-gray-300 mb-6">For advanced needs</p>
+          <div className="rounded-lg border border-gray-200 bg-gradient-to-br from-gray-50 to-gray-100 p-5 shadow-lg transition-shadow hover:shadow-xl dark:border-gray-700 dark:from-gray-800 dark:to-gray-900 sm:p-6 md:p-8">
+            <h3 className="mb-2 text-xl font-bold text-gray-900 dark:text-white sm:text-2xl">Scale</h3>
+            <p className="mb-6 text-gray-600 dark:text-gray-300">Built for advanced apps, automation, and support.</p>
             <div className="mb-8">
-              <span className="text-4xl font-bold text-orange-500">${service.pricing.premium}</span>
+              <span className="text-4xl font-bold text-orange-500">${service.pricing.scale}</span>
               <span className="text-gray-600 dark:text-gray-400">/month</span>
             </div>
-            <button onClick={() => handleGetStarted('Premium', service.pricing.premium)} className="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 px-4 rounded-lg transition-colors mb-4">Get Started</button>
+            <button onClick={() => handleGetStarted("Scale", service.pricing.scale)} className="mb-4 w-full rounded-lg bg-orange-500 px-4 py-3 font-bold text-white transition-colors hover:bg-orange-600">
+              Get Started
+            </button>
           </div>
         </div>
       </div>
 
-      {/* Contact Section */}
-      <div className="bg-white dark:bg-gray-900 rounded-lg shadow-lg p-12 border border-gray-200 dark:border-gray-800">
-        <h2 className="text-4xl font-bold font-serif text-center text-gray-900 dark:text-white mb-12">
+      <div className="rounded-lg border border-gray-200 bg-white p-5 shadow-lg dark:border-gray-800 dark:bg-gray-900 sm:p-8 md:p-12">
+        <h2 className="mb-8 text-center font-serif text-2xl font-bold text-gray-900 dark:text-white sm:mb-12 sm:text-3xl md:text-4xl">
           Get <span className="text-orange-500 dark:text-orange-400">In Touch</span>
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {/* Email */}
-          <a
-            href="mailto:muhammadyousaf5482@gmail.com"
-            className="bg-gradient-to-br from-orange-50 to-orange-100 dark:from-gray-800 dark:to-gray-700 rounded-lg p-8 text-center border border-orange-200 dark:border-gray-600 hover:shadow-lg transition-all transform hover:scale-105"
-          >
-            <Mail size={60} className="text-orange-500 mx-auto mb-4" />
-            <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">Email</h3>
-            <p className="text-gray-700 dark:text-gray-300 break-words">muhammadyousaf5482@gmail.com</p>
-            <button className="mt-4 w-full bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded-lg transition-colors">
-              Send Email
-            </button>
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-3 md:gap-6 lg:gap-8">
+          <a href="mailto:muhammadyousaf5482@gmail.com" className="rounded-lg border border-orange-200 bg-gradient-to-br from-orange-50 to-orange-100 p-5 text-center transition-all hover:scale-105 hover:shadow-lg dark:border-gray-600 dark:from-gray-800 dark:to-gray-700 sm:p-6 md:p-8">
+            <Mail size={60} className="mx-auto mb-4 text-orange-500" />
+            <h3 className="mb-2 text-xl font-bold text-gray-900 dark:text-white sm:text-2xl">Email</h3>
+            <p className="break-words text-gray-700 dark:text-gray-300">muhammadyousaf5482@gmail.com</p>
+            <button className="mt-4 w-full rounded-lg bg-orange-500 px-4 py-2 font-bold text-white transition-colors hover:bg-orange-600">Send Email</button>
           </a>
 
-          {/* Phone */}
-          <a
-            href="tel:+923336005482"
-            className="bg-gradient-to-br from-orange-50 to-orange-100 dark:from-gray-800 dark:to-gray-700 rounded-lg p-8 text-center border border-orange-200 dark:border-gray-600 hover:shadow-lg transition-all transform hover:scale-105"
-          >
-            <Phone size={60} className="text-orange-500 mx-auto mb-4" />
-            <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">Phone</h3>
+          <a href="tel:+923336005482" className="rounded-lg border border-orange-200 bg-gradient-to-br from-orange-50 to-orange-100 p-5 text-center transition-all hover:scale-105 hover:shadow-lg dark:border-gray-600 dark:from-gray-800 dark:to-gray-700 sm:p-6 md:p-8">
+            <Phone size={60} className="mx-auto mb-4 text-orange-500" />
+            <h3 className="mb-2 text-xl font-bold text-gray-900 dark:text-white sm:text-2xl">Phone</h3>
             <p className="text-gray-700 dark:text-gray-300">+92 333 6005482</p>
-            <button className="mt-4 w-full bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded-lg transition-colors">
-              Call Now
-            </button>
+            <button className="mt-4 w-full rounded-lg bg-orange-500 px-4 py-2 font-bold text-white transition-colors hover:bg-orange-600">Call Now</button>
           </a>
 
-          {/* WhatsApp */}
-          <a
-            href="https://wa.me/923336005482"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="bg-gradient-to-br from-orange-50 to-orange-100 dark:from-gray-800 dark:to-gray-700 rounded-lg p-8 text-center border border-orange-200 dark:border-gray-600 hover:shadow-lg transition-all transform hover:scale-105"
-          >
-            <MessageCircle size={60} className="text-orange-500 mx-auto mb-4" />
-            <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">WhatsApp</h3>
+          <a href="https://wa.me/923336005482" target="_blank" rel="noopener noreferrer" className="rounded-lg border border-orange-200 bg-gradient-to-br from-orange-50 to-orange-100 p-5 text-center transition-all hover:scale-105 hover:shadow-lg dark:border-gray-600 dark:from-gray-800 dark:to-gray-700 sm:p-6 md:p-8">
+            <MessageCircle size={60} className="mx-auto mb-4 text-orange-500" />
+            <h3 className="mb-2 text-xl font-bold text-gray-900 dark:text-white sm:text-2xl">WhatsApp</h3>
             <p className="text-gray-700 dark:text-gray-300">+92 333 6005482</p>
-            <button className="mt-4 w-full bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded-lg transition-colors">
-              Message on WhatsApp
-            </button>
+            <button className="mt-4 w-full rounded-lg bg-orange-500 px-4 py-2 font-bold text-white transition-colors hover:bg-orange-600">Message on WhatsApp</button>
           </a>
         </div>
       </div>
     </div>
   );
 }
-

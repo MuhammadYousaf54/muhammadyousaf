@@ -1,161 +1,136 @@
-﻿import React from 'react'
-import { useNavigate } from '@router'
-import { Code, Zap, TrendingUp, BarChart3 } from 'lucide-react'
+import React from "react";
+import { useNavigate } from "@router";
+import { BarChart3, Code, TrendingUp, Zap } from "lucide-react";
 
 export default function OurServices() {
   const navigate = useNavigate();
 
   const services = [
     {
-      id: 'web-development',
+      id: "web-development",
       icon: <Code size={60} className="text-orange-500" />,
       title: "Web Development & Hosting",
-      description: "Build scalable, responsive websites and web applications with modern technologies. We handle everything from design to deployment and hosting.",
-      pricing: { basic: 500, standard: 1200, premium: 2500 }
+      description: "Scalable, responsive websites and web applications from design to deployment.",
+      pricing: { starter: 500, growth: 1200, scale: 2500 },
     },
     {
-      id: 'ai-automation',
+      id: "ai-automation",
       icon: <Zap size={60} className="text-orange-500" />,
       title: "AI Automation & CRM Integration",
-      description: "Streamline your business operations with AI-powered automation and seamless CRM integration for better customer relationships.",
-      pricing: { basic: 800, standard: 1800, premium: 3500 }
+      description: "AI-powered workflows, CRM automation, and operational efficiency systems.",
+      pricing: { starter: 800, growth: 1800, scale: 3500 },
     },
     {
-      id: 'digital-marketing',
+      id: "digital-marketing",
       icon: <TrendingUp size={60} className="text-orange-500" />,
-      title: "Digital Marketing Expert",
-      description: "Boost your online presence with strategic digital marketing, SEO optimization, social media management, and content creation.",
-      pricing: { basic: 600, standard: 1500, premium: 3000 }
+      title: "Digital Marketing",
+      description: "Campaign strategy, SEO, social media growth, and reporting support.",
+      pricing: { starter: 600, growth: 1500, scale: 3000 },
     },
     {
-      id: 'data-analysis',
+      id: "data-analysis",
       icon: <BarChart3 size={60} className="text-orange-500" />,
       title: "Data Analysis",
-      description: "Transform raw data into actionable insights with comprehensive data analysis, visualization, and business intelligence solutions.",
-      pricing: { basic: 700, standard: 1600, premium: 2800 }
-    }
+      description: "Actionable analytics, dashboards, visualizations, and business intelligence.",
+      pricing: { starter: 700, growth: 1600, scale: 2800 },
+    },
   ];
 
   return (
-    <div className="mx-auto w-full px-3 sm:px-4 md:px-6 lg:px-8 py-8 sm:py-12 md:py-16 lg:py-20 min-h-screen bg-gradient-to-b from-white to-gray-50 dark:from-gray-900 dark:to-black transition-colors">
-      <div className="flex flex-col items-center justify-center mb-8 sm:mb-12 md:mb-16">
-        <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-center text-gray-900 dark:text-white">
+    <div className="mx-auto min-h-screen w-full bg-gradient-to-b from-white to-gray-50 px-3 py-8 transition-colors dark:from-gray-900 dark:to-black sm:px-4 sm:py-12 md:px-6 md:py-16 lg:px-8 lg:py-20">
+      <div className="mb-8 flex flex-col items-center justify-center sm:mb-12 md:mb-16">
+        <h1 className="text-center text-2xl font-bold text-gray-900 dark:text-white sm:text-3xl md:text-4xl lg:text-5xl">
           Our-<span className="text-orange-500 dark:text-orange-400">Services</span>
         </h1>
-        <p className="text-xs sm:text-sm md:text-base text-gray-600 dark:text-gray-300 text-center mt-3 sm:mt-4 max-w-2xl px-2">
-          We offer comprehensive solutions tailored to your business needs
+        <p className="mt-3 max-w-2xl px-2 text-center text-xs text-gray-600 dark:text-gray-300 sm:mt-4 sm:text-sm md:text-base">
+          Complete solutions for modern businesses, built to work beautifully on mobile, tablet, and desktop.
         </p>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 md:gap-8 mb-12 sm:mb-16 md:mb-20">
+      <div className="mb-12 grid grid-cols-1 gap-4 sm:mb-16 sm:grid-cols-2 sm:gap-6 md:mb-20 md:gap-8 lg:grid-cols-4">
         {services.map((service, index) => (
-          <div 
+          <div
             key={index}
             onClick={() => navigate(`/service/${service.id}`)}
-            className="bg-white dark:bg-gray-800 rounded-lg sm:rounded-xl shadow-md sm:shadow-lg hover:shadow-lg sm:hover:shadow-xl transition-shadow duration-300 p-4 sm:p-6 md:p-8 text-center hover:scale-105 transform transition-transform border border-gray-200 dark:border-gray-700 cursor-pointer"
+            className="cursor-pointer rounded-lg border border-gray-200 bg-white p-4 text-center shadow-md transition-transform duration-300 hover:scale-105 hover:shadow-xl dark:border-gray-700 dark:bg-gray-800 sm:rounded-xl sm:p-6 md:p-8"
           >
-            <div className="flex justify-center mb-3 sm:mb-4 md:mb-6">
-              {service.icon && React.cloneElement(service.icon, {size: 40, className: "sm:w-16 sm:h-16 md:w-20 md:h-20"})}
+            <div className="mb-3 flex justify-center sm:mb-4 md:mb-6">
+              {service.icon && React.cloneElement(service.icon, { size: 40, className: "sm:h-16 sm:w-16 md:h-20 md:w-20" })}
             </div>
-            <h2 className="text-lg sm:text-xl md:text-2xl font-semibold text-gray-900 dark:text-white mb-2 sm:mb-3 md:mb-4">
+            <h2 className="mb-2 text-lg font-semibold text-gray-900 dark:text-white sm:mb-3 sm:text-xl md:mb-4 md:text-2xl">
               {service.title}
             </h2>
-            <p className="text-xs sm:text-sm md:text-base text-gray-700 dark:text-gray-300 leading-relaxed">
-              {service.description}
-            </p>
+            <p className="text-xs leading-relaxed text-gray-700 dark:text-gray-300 sm:text-sm md:text-base">{service.description}</p>
           </div>
         ))}
       </div>
 
-      {/* Pricing Section */}
-      <div className="flex flex-col items-center justify-center bg-white dark:bg-gray-900 rounded-lg sm:rounded-xl shadow-md sm:shadow-lg p-4 sm:p-6 md:p-12 border border-gray-200 dark:border-gray-800">
-        <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center text-gray-900 dark:text-white mb-8 sm:mb-12">
+      <div className="flex flex-col items-center justify-center rounded-lg border border-gray-200 bg-white p-4 shadow-md dark:border-gray-800 dark:bg-gray-900 sm:rounded-xl sm:p-6 md:p-12">
+        <h2 className="mb-8 text-center text-2xl font-bold text-gray-900 dark:text-white sm:mb-12 sm:text-3xl md:text-4xl">
           Service <span className="text-orange-500 dark:text-orange-400">Pricing</span>
         </h2>
 
-        {/* Pricing Grid */}
-        <div className="w-full overflow-x-auto">
-          <table className="w-full text-center text-xs sm:text-sm md:text-base">
-            <thead>
-              <tr className="bg-gray-100 dark:bg-gray-800 border-b-2 border-orange-500">
-                <th className="px-2 sm:px-4 md:px-6 py-2 sm:py-3 md:py-4 text-gray-900 dark:text-white font-bold text-left text-xs sm:text-sm md:text-base">Service</th>
-                <th className="px-2 sm:px-4 md:px-6 py-2 sm:py-3 md:py-4 text-gray-900 dark:text-white font-bold">
-                  <div className="text-orange-500 text-xs sm:text-sm">Basic</div>
-                  <div className="text-xs text-gray-600 dark:text-gray-300">Starter</div>
-                </th>
-                <th className="px-2 sm:px-4 md:px-6 py-2 sm:py-3 md:py-4 text-gray-900 dark:text-white font-bold">
-                  <div className="text-orange-600 text-xs sm:text-sm">Standard</div>
-                  <div className="text-xs text-gray-600 dark:text-gray-300">Popular</div>
-                </th>
-                <th className="px-2 sm:px-4 md:px-6 py-2 sm:py-3 md:py-4 text-gray-900 dark:text-white font-bold">
-                  <div className="text-orange-700 text-xs sm:text-sm">Premium</div>
-                  <div className="text-xs text-gray-600 dark:text-gray-300">Enterprise</div>
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              {services.map((service, index) => (
-                <tr key={index} className="border-b border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
-                  <td className="px-2 sm:px-4 md:px-6 py-2 sm:py-3 md:py-4 text-gray-900 dark:text-white font-semibold text-left text-xs sm:text-sm md:text-base">{service.title}</td>
-                  <td className="px-2 sm:px-4 md:px-6 py-2 sm:py-3 md:py-4">
-                    <div className="text-lg sm:text-xl md:text-2xl font-bold text-orange-500">${service.pricing.basic}</div>
-                    <div className="text-xs text-gray-600 dark:text-gray-400">/month</div>
-                  </td>
-                  <td className="px-2 sm:px-4 md:px-6 py-2 sm:py-3 md:py-4 bg-orange-50 dark:bg-gray-700">
-                    <div className="text-lg sm:text-xl md:text-2xl font-bold text-orange-600">${service.pricing.standard}</div>
-                    <div className="text-xs text-gray-600 dark:text-gray-400">/month</div>
-                  </td>
-                  <td className="px-2 sm:px-4 md:px-6 py-2 sm:py-3 md:py-4">
-                    <div className="text-lg sm:text-xl md:text-2xl font-bold text-orange-700">${service.pricing.premium}</div>
-                    <div className="text-xs text-gray-600 dark:text-gray-400">/month</div>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+        <div className="grid w-full grid-cols-1 gap-4 md:grid-cols-2">
+          {services.map((service, index) => (
+            <div key={index} className="rounded-2xl border border-gray-200 bg-gray-50 p-4 dark:border-gray-700 dark:bg-gray-800/70 sm:p-5">
+              <div className="mb-4">
+                <h3 className="text-base font-bold text-gray-900 dark:text-white sm:text-lg">{service.title}</h3>
+                <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">{service.description}</p>
+              </div>
+              <div className="grid grid-cols-3 gap-2">
+                <div className="rounded-xl bg-white p-3 text-center dark:bg-gray-900">
+                  <div className="text-xs font-semibold text-orange-500">Starter</div>
+                  <div className="mt-1 text-lg font-bold text-gray-900 dark:text-white">${service.pricing.starter}</div>
+                </div>
+                <div className="rounded-xl border border-orange-200 bg-orange-50 p-3 text-center dark:border-orange-800 dark:bg-orange-950/40">
+                  <div className="text-xs font-semibold text-orange-600">Growth</div>
+                  <div className="mt-1 text-lg font-bold text-gray-900 dark:text-white">${service.pricing.growth}</div>
+                </div>
+                <div className="rounded-xl bg-white p-3 text-center dark:bg-gray-900">
+                  <div className="text-xs font-semibold text-orange-700">Scale</div>
+                  <div className="mt-1 text-lg font-bold text-gray-900 dark:text-white">${service.pricing.scale}</div>
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
 
-        {/* Plan Comparison */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 md:gap-8 mt-8 sm:mt-12 md:mt-16 w-full">
-          {/* Basic */}
-          <div className="bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-900 rounded-lg sm:rounded-xl p-4 sm:p-6 md:p-8 border border-gray-300 dark:border-gray-700">
-            <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-gray-900 dark:text-white mb-4 sm:mb-6">Basic Plan</h3>
-            <ul className="space-y-2 sm:space-y-3 text-xs sm:text-sm md:text-base text-gray-700 dark:text-gray-300 mb-6 sm:mb-8">
-              <li className="flex items-center"><span className="text-orange-500 mr-2 sm:mr-3 text-lg sm:text-xl">âœ“</span> Core Service</li>
-              <li className="flex items-center"><span className="text-orange-500 mr-2 sm:mr-3 text-lg sm:text-xl">âœ“</span> Email Support</li>
-              <li className="flex items-center"><span className="text-orange-500 mr-2 sm:mr-3 text-lg sm:text-xl">âœ“</span> Starter Package</li>
-              <li className="flex items-center"><span className="text-orange-500 mr-2 sm:mr-3 text-lg sm:text-xl">âœ“</span> 1 Month Setup</li>
+        <div className="mt-8 grid w-full grid-cols-1 gap-4 sm:mt-12 sm:grid-cols-3 sm:gap-6 md:mt-16 md:gap-8">
+          <div className="rounded-lg border border-gray-300 bg-gradient-to-br from-gray-50 to-gray-100 p-4 dark:border-gray-700 dark:from-gray-800 dark:to-gray-900 sm:rounded-xl sm:p-6 md:p-8">
+            <h3 className="mb-4 text-lg font-bold text-gray-900 dark:text-white sm:mb-6 sm:text-xl md:text-2xl">Starter Plan</h3>
+            <ul className="mb-6 space-y-2 text-xs text-gray-700 dark:text-gray-300 sm:mb-8 sm:text-sm md:text-base">
+              <li className="flex items-center"><span className="mr-2 text-lg text-orange-500 sm:mr-3 sm:text-xl">+</span> Core service delivery</li>
+              <li className="flex items-center"><span className="mr-2 text-lg text-orange-500 sm:mr-3 sm:text-xl">+</span> Email support</li>
+              <li className="flex items-center"><span className="mr-2 text-lg text-orange-500 sm:mr-3 sm:text-xl">+</span> Responsive setup</li>
+              <li className="flex items-center"><span className="mr-2 text-lg text-orange-500 sm:mr-3 sm:text-xl">+</span> Fast launch</li>
             </ul>
-            <button className="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded-lg transition-colors text-sm sm:text-base">Choose Basic</button>
+            <button className="w-full rounded-lg bg-orange-500 px-4 py-2 font-bold text-white transition-colors hover:bg-orange-600 sm:text-base">Choose Starter</button>
           </div>
 
-          {/* Standard */}
-          <div className="bg-gradient-to-br from-orange-50 to-orange-100 dark:from-gray-700 dark:to-gray-800 rounded-lg sm:rounded-xl p-4 sm:p-6 md:p-8 border-2 border-orange-500 shadow-md sm:shadow-lg">
-            <div className="bg-orange-500 text-white text-center py-1 sm:py-2 rounded-lg mb-3 sm:mb-4 font-bold text-xs sm:text-sm">MOST POPULAR</div>
-            <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-gray-900 dark:text-white mb-4 sm:mb-6">Standard Plan</h3>
-            <ul className="space-y-2 sm:space-y-3 text-xs sm:text-sm md:text-base text-gray-700 dark:text-gray-300 mb-6 sm:mb-8">
-              <li className="flex items-center"><span className="text-orange-600 mr-2 sm:mr-3 text-lg sm:text-xl">âœ“</span> Full Service</li>
-              <li className="flex items-center"><span className="text-orange-600 mr-2 sm:mr-3 text-lg sm:text-xl">âœ“</span> Priority Support</li>
-              <li className="flex items-center"><span className="text-orange-600 mr-2 sm:mr-3 text-lg sm:text-xl">âœ“</span> Advanced Features</li>
-              <li className="flex items-center"><span className="text-orange-600 mr-2 sm:mr-3 text-lg sm:text-xl">âœ“</span> 3 Month Support</li>
+          <div className="rounded-lg border-2 border-orange-500 bg-gradient-to-br from-orange-50 to-orange-100 p-4 shadow-md dark:from-gray-700 dark:to-gray-800 sm:rounded-xl sm:p-6 md:p-8">
+            <div className="mb-3 rounded-lg bg-orange-500 py-1 text-center text-xs font-bold text-white sm:mb-4 sm:py-2 sm:text-sm">MOST POPULAR</div>
+            <h3 className="mb-4 text-lg font-bold text-gray-900 dark:text-white sm:mb-6 sm:text-xl md:text-2xl">Growth Plan</h3>
+            <ul className="mb-6 space-y-2 text-xs text-gray-700 dark:text-gray-300 sm:mb-8 sm:text-sm md:text-base">
+              <li className="flex items-center"><span className="mr-2 text-lg text-orange-600 sm:mr-3 sm:text-xl">+</span> Full service scope</li>
+              <li className="flex items-center"><span className="mr-2 text-lg text-orange-600 sm:mr-3 sm:text-xl">+</span> Priority support</li>
+              <li className="flex items-center"><span className="mr-2 text-lg text-orange-600 sm:mr-3 sm:text-xl">+</span> CRM and dashboard features</li>
+              <li className="flex items-center"><span className="mr-2 text-lg text-orange-600 sm:mr-3 sm:text-xl">+</span> Growth-focused delivery</li>
             </ul>
-            <button className="w-full bg-orange-600 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded-lg transition-colors text-sm sm:text-base">Choose Standard</button>
+            <button className="w-full rounded-lg bg-orange-600 px-4 py-2 font-bold text-white transition-colors hover:bg-orange-700 sm:text-base">Choose Growth</button>
           </div>
 
-          {/* Premium */}
-          <div className="bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-900 rounded-lg sm:rounded-xl p-4 sm:p-6 md:p-8 border border-gray-300 dark:border-gray-700">
-            <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-gray-900 dark:text-white mb-4 sm:mb-6">Premium Plan</h3>
-            <ul className="space-y-2 sm:space-y-3 text-xs sm:text-sm md:text-base text-gray-700 dark:text-gray-300 mb-6 sm:mb-8">
-              <li className="flex items-center"><span className="text-orange-500 mr-2 sm:mr-3 text-lg sm:text-xl">âœ“</span> All Services</li>
-              <li className="flex items-center"><span className="text-orange-500 mr-2 sm:mr-3 text-lg sm:text-xl">âœ“</span> 24/7 Support</li>
-              <li className="flex items-center"><span className="text-orange-500 mr-2 sm:mr-3 text-lg sm:text-xl">âœ“</span> Custom Solutions</li>
-              <li className="flex items-center"><span className="text-orange-500 mr-2 sm:mr-3 text-lg sm:text-xl">âœ“</span> Unlimited Support</li>
+          <div className="rounded-lg border border-gray-300 bg-gradient-to-br from-gray-50 to-gray-100 p-4 dark:border-gray-700 dark:from-gray-800 dark:to-gray-900 sm:rounded-xl sm:p-6 md:p-8">
+            <h3 className="mb-4 text-lg font-bold text-gray-900 dark:text-white sm:mb-6 sm:text-xl md:text-2xl">Scale Plan</h3>
+            <ul className="mb-6 space-y-2 text-xs text-gray-700 dark:text-gray-300 sm:mb-8 sm:text-sm md:text-base">
+              <li className="flex items-center"><span className="mr-2 text-lg text-orange-500 sm:mr-3 sm:text-xl">+</span> End-to-end execution</li>
+              <li className="flex items-center"><span className="mr-2 text-lg text-orange-500 sm:mr-3 sm:text-xl">+</span> 24/7 support</li>
+              <li className="flex items-center"><span className="mr-2 text-lg text-orange-500 sm:mr-3 sm:text-xl">+</span> Custom architecture</li>
+              <li className="flex items-center"><span className="mr-2 text-lg text-orange-500 sm:mr-3 sm:text-xl">+</span> Long-term optimization</li>
             </ul>
-            <button className="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded-lg transition-colors text-sm sm:text-base">Choose Premium</button>
+            <button className="w-full rounded-lg bg-orange-500 px-4 py-2 font-bold text-white transition-colors hover:bg-orange-600 sm:text-base">Choose Scale</button>
           </div>
         </div>
       </div>
     </div>
   );
 }
-

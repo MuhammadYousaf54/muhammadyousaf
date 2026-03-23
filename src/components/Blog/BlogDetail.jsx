@@ -1,68 +1,91 @@
-﻿import { useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { ArrowLeft, Calendar, Clock, User, Heart, Eye, MessageCircle, Bookmark } from "lucide-react";
 import { Link, useNavigate, useParams } from "@router";
 import {
+  addPostComment,
   formatDisplayDate,
   getBookmarkedPostIds,
   getCommentAuthorName,
   getLikedPostIds,
-  getStoredPosts,
+  getPostByIdOrSlug,
   isPostBookmarked,
   isPostLiked,
-  savePosts,
+  likePost,
+  markPostLiked,
   toggleBookmarkPost,
-  toggleLikePost,
 } from "./blogStorage";
 
 export default function BlogDetail() {
   const { postId } = useParams();
   const navigate = useNavigate();
-  const [posts, setPosts] = useState(() => getStoredPosts());
+  const [post, setPost] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
   const [commentText, setCommentText] = useState("");
   const [likedIds, setLikedIds] = useState(() => getLikedPostIds());
   const [bookmarkedIds, setBookmarkedIds] = useState(() => getBookmarkedPostIds());
 
-  const post = useMemo(() => posts.find((item) => item.id === postId && item.published), [posts, postId]);
+  useEffect(() => {
+    let mounted = true;
+    const loadPost = async () => {
+      try {
+        setIsLoading(true);
+        const loaded = await getPostByIdOrSlug(postId);
+        if (mounted) setPost(loaded);
+      } catch (err) {
+        if (mounted) setPost(null);
+      } finally {
+        if (mounted) setIsLoading(false);
+      }
+    };
 
-  const onLike = () => {
+    if (postId) loadPost();
+    return () => {
+      mounted = false;
+    };
+  }, [postId]);
+
+  const onLike = async () => {
     if (!post) return;
-    const { nextPosts, nextLikedIds } = toggleLikePost(post.id, posts);
-    setPosts(nextPosts);
-    setLikedIds(nextLikedIds);
+    try {
+      const updated = await likePost(post._id);
+      setPost(updated);
+      const nextLikedIds = markPostLiked(post._id);
+      setLikedIds(nextLikedIds);
+    } catch (err) {
+      console.error("Like failed:", err);
+    }
   };
 
   const onBookmark = () => {
     if (!post) return;
-    const next = toggleBookmarkPost(post.id);
+    const next = toggleBookmarkPost(post._id);
     setBookmarkedIds(next);
   };
 
-  const onCommentSubmit = (event) => {
+  const onCommentSubmit = async (event) => {
     event.preventDefault();
     const cleanedComment = commentText.trim();
     if (!post || !cleanedComment) return;
 
-    const newComment = {
-      id: `${Date.now()}`,
-      author: getCommentAuthorName(),
-      content: cleanedComment,
-      createdAt: new Date().toISOString(),
-    };
-
-    const nextPosts = posts.map((item) => {
-      if (item.id !== post.id) return item;
-      const nextComments = [...(item.commentsList || []), newComment];
-      return {
-        ...item,
-        commentsList: nextComments,
-        comments: nextComments.length,
-      };
-    });
-
-    setPosts(nextPosts);
-    savePosts(nextPosts);
-    setCommentText("");
+    try {
+      const updated = await addPostComment(post._id, {
+        author: getCommentAuthorName(),
+        content: cleanedComment,
+      });
+      setPost(updated);
+      setCommentText("");
+    } catch (err) {
+      console.error("Comment failed:", err);
+    }
   };
+
+  if (isLoading) {
+    return (
+      <div className="min-h-[60vh] flex items-center justify-center px-4">
+        <p className="text-lg font-semibold text-gray-700 dark:text-gray-300">Loading blog post...</p>
+      </div>
+    );
+  }
 
   if (!post) {
     return (
@@ -134,23 +157,23 @@ export default function BlogDetail() {
               <button
                 onClick={onLike}
                 className={`w-full sm:w-auto px-5 py-2 rounded-lg font-semibold ${
-                  isPostLiked(post.id)
+                  isPostLiked(post._id)
                     ? "bg-gradient-to-r from-pink-600 to-rose-600 text-white"
                     : "bg-gradient-to-r from-pink-500 to-rose-500 text-white hover:opacity-90"
                 }`}
               >
-                {likedIds.includes(post.id) ? "Liked" : "Like Article"}
+                {likedIds.includes(post._id) ? "Liked" : "Like Article"}
               </button>
               <button
                 onClick={onBookmark}
                 className={`w-full sm:w-auto px-5 py-2 rounded-lg border-2 font-semibold inline-flex items-center justify-center gap-2 ${
-                  isPostBookmarked(post.id)
+                  isPostBookmarked(post._id)
                     ? "border-orange-500 text-orange-600"
                     : "border-gray-300 dark:border-slate-600 text-gray-700 dark:text-gray-300"
                 }`}
               >
                 <Bookmark size={16} />
-                {bookmarkedIds.includes(post.id) ? "Bookmarked" : "Bookmark"}
+                {bookmarkedIds.includes(post._id) ? "Bookmarked" : "Bookmark"}
               </button>
             </div>
 
@@ -177,7 +200,7 @@ export default function BlogDetail() {
               ) : (
                 <div className="space-y-4">
                   {(post.commentsList || []).map((comment) => (
-                    <div key={comment.id} className="p-4 rounded-lg border border-gray-200 dark:border-slate-700">
+                    <div key={comment._id || comment.id} className="p-4 rounded-lg border border-gray-200 dark:border-slate-700">
                       <div className="flex items-center justify-between mb-2">
                         <p className="font-semibold text-gray-900 dark:text-white">{comment.author}</p>
                         <p className="text-xs text-gray-500 dark:text-gray-400">{formatDisplayDate(comment.createdAt)}</p>
@@ -194,4 +217,3 @@ export default function BlogDetail() {
     </div>
   );
 }
-

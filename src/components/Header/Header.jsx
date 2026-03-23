@@ -4,31 +4,29 @@ import { Moon, Sun, LogOut, Menu, X, LayoutDashboard } from 'lucide-react'
 
 export default function Header() {
     const navigate = useNavigate()
-    const [isDark, setIsDark] = useState(() => {
-        if (typeof window === "undefined") return false;
-        return localStorage.getItem('theme') === 'dark';
-    });
-    
-    const [isLoggedIn, setIsLoggedIn] = useState(() => {
-        if (typeof window === "undefined") return false;
-        return localStorage.getItem('isLoggedIn') === 'true';
-    });
-    
-    const [userRole, setUserRole] = useState(() => {
-        if (typeof window === "undefined") return null;
-        return localStorage.getItem('userRole') || null;
-    });
-
-    const [isOwnerAdmin, setIsOwnerAdmin] = useState(() => {
-        if (typeof window === "undefined") return false;
-        const savedFlag = localStorage.getItem('isOwnerAdmin') === 'true';
-        const savedEmail = (localStorage.getItem('userEmail') || '').toLowerCase();
-        return savedFlag || savedEmail === 'muhammadyousaf5482@gmail.com';
-    });
-    
+    const [isDark, setIsDark] = useState(false);
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [userRole, setUserRole] = useState(null);
+    const [isOwnerAdmin, setIsOwnerAdmin] = useState(false);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [hasHydrated, setHasHydrated] = useState(false);
 
     useEffect(() => {
+        const savedTheme = localStorage.getItem('theme');
+        const savedIsLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+        const savedUserRole = localStorage.getItem('userRole') || null;
+        const savedOwnerFlag = localStorage.getItem('isOwnerAdmin') === 'true';
+        const savedEmail = (localStorage.getItem('userEmail') || '').toLowerCase();
+
+        setIsDark(savedTheme === 'dark');
+        setIsLoggedIn(savedIsLoggedIn);
+        setUserRole(savedUserRole);
+        setIsOwnerAdmin(savedOwnerFlag || savedEmail === 'muhammadyousaf5482@gmail.com');
+        setHasHydrated(true);
+    }, []);
+
+    useEffect(() => {
+        if (!hasHydrated) return;
         if (isDark) {
             document.documentElement.classList.add('dark');
             localStorage.setItem('theme', 'dark');
@@ -36,7 +34,7 @@ export default function Header() {
             document.documentElement.classList.remove('dark');
             localStorage.setItem('theme', 'light');
         }
-    }, [isDark]);
+    }, [hasHydrated, isDark]);
 
     const handleLogout = () => {
         localStorage.removeItem('isLoggedIn');
@@ -51,28 +49,67 @@ export default function Header() {
     };
     
     const closeMenu = () => setIsMenuOpen(false);
+    const isAdminView = isLoggedIn && (userRole === 'Admin' || isOwnerAdmin);
+    const navLinkClassName = ({isActive}) =>
+        `block rounded-lg px-3 py-2 duration-200 ${isActive ? "text-orange-500 font-bold" : isDark ? "text-white" : "text-gray-800"} hover:text-orange-500 ${isDark ? 'hover:bg-white/10' : 'hover:bg-slate-100'}`;
 
     return (
         <header className="shadow sticky z-50 top-0">
-            <nav className={`${isDark ? 'bg-gradient-to-r from-slate-900 via-purple-900 to-slate-900' : 'bg-gradient-to-r from-blue-50 via-white to-cyan-50'} px-4 sm:px-6 lg:px-8 py-3 transition-all duration-300 border-b ${isDark ? 'border-purple-700' : 'border-cyan-100'}`}>
-                <div className="flex flex-wrap justify-between items-center mx-auto w-full">
+            <nav className={`${isDark ? 'bg-gradient-to-r from-slate-900 via-purple-900 to-slate-900' : 'bg-gradient-to-r from-blue-50 via-white to-cyan-50'} relative px-4 sm:px-6 lg:px-8 py-3 transition-all duration-300 border-b ${isDark ? 'border-purple-700' : 'border-cyan-100'}`}>
+                <div className="flex flex-nowrap justify-between items-center gap-3 mx-auto w-full min-w-0">
                     <Link to="/" className={`flex items-center text-xl sm:text-2xl md:text-3xl font-black bg-gradient-to-r ${isDark ? 'from-orange-400 via-pink-400 to-purple-400' : 'from-orange-500 via-purple-600 to-blue-600'} bg-clip-text text-transparent hover:scale-105 transition-transform`}>
                         Muhammad Yousaf
                     </Link>
-                    
-                    {/* Hamburger Button */}
-                    <button
-                        onClick={() => setIsMenuOpen(!isMenuOpen)}
-                        className={`md:hidden p-2 rounded-lg transition-colors ${isDark ? 'text-white hover:bg-purple-800' : 'text-gray-800 hover:bg-blue-100'}`}
-                    >
-                        {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-                    </button>
+
+                    {!isAdminView && (
+                        <div className="hidden md:flex md:items-center md:ml-8" id="desktop-menu">
+                            <ul className={`flex flex-row space-x-2 lg:space-x-3 w-full ${isDark ? 'text-white' : 'text-gray-800'}`}>
+                                <li>
+                                    <NavLink to="/" onClick={closeMenu} className={navLinkClassName}>
+                                        Home
+                                    </NavLink>
+                                </li>
+                                <li>
+                                    <NavLink to="/about" onClick={closeMenu} className={navLinkClassName}>
+                                        About
+                                    </NavLink>
+                                </li>
+                                <li>
+                                    <NavLink to="/services" onClick={closeMenu} className={navLinkClassName}>
+                                        Services
+                                    </NavLink>
+                                </li>
+                                <li>
+                                    <NavLink to="/contact" onClick={closeMenu} className={navLinkClassName}>
+                                        Contact
+                                    </NavLink>
+                                </li>
+                                <li>
+                                    <NavLink to="/github" onClick={closeMenu} className={navLinkClassName}>
+                                        Github
+                                    </NavLink>
+                                </li>
+                                <li>
+                                    <NavLink to="/blog" onClick={closeMenu} className={navLinkClassName}>
+                                        Blog
+                                    </NavLink>
+                                </li>
+                            </ul>
+                        </div>
+                    )}
 
                     {/* Right Side Icons and Buttons */}
-                    <div className="flex items-center md:order-2 gap-2 sm:gap-4">
+                    <div className="ml-auto flex flex-nowrap items-center gap-2 sm:gap-3">
+                        <button
+                            onClick={() => setIsMenuOpen(!isMenuOpen)}
+                            className={`${isDark ? 'text-white hover:bg-purple-800/80 border-white/10' : 'text-gray-800 hover:bg-blue-100 border-slate-200'} ${isAdminView ? 'flex' : 'flex md:hidden'} items-center justify-center rounded-xl border p-2.5 transition-colors`}
+                            title={isMenuOpen ? "Close Menu" : "Open Menu"}
+                        >
+                            {isMenuOpen ? <X size={18} /> : <Menu size={18} />}
+                        </button>
                         <button
                             onClick={() => setIsDark(!isDark)}
-                            className={`${isDark ? 'bg-yellow-500/20 hover:bg-yellow-500/30 text-yellow-300' : 'bg-orange-100 hover:bg-orange-200 text-orange-600'} focus:ring-4 ${isDark ? 'focus:ring-yellow-500/50' : 'focus:ring-orange-300'} font-medium rounded-full text-sm p-2 sm:p-3 focus:outline-none transition-all duration-300 transform hover:scale-110`}
+                            className={`${isDark ? 'bg-yellow-500/20 hover:bg-yellow-500/30 text-yellow-300 border-yellow-400/20' : 'bg-orange-100 hover:bg-orange-200 text-orange-600 border-orange-200'} focus:ring-4 ${isDark ? 'focus:ring-yellow-500/50' : 'focus:ring-orange-300'} font-medium rounded-xl border text-sm p-2.5 focus:outline-none transition-all duration-300`}
                             title={isDark ? "Light Mode" : "Dark Mode"}
                         >
                             {isDark ? <Sun size={18} className="sm:w-5 sm:h-5" /> : <Moon size={18} className="sm:w-5 sm:h-5" />}
@@ -80,22 +117,22 @@ export default function Header() {
                         
                         {isLoggedIn ? (
                             <>
-                                <div className={`${isDark ? 'text-cyan-300' : 'text-purple-600'} text-xs sm:text-sm font-bold px-2 sm:px-3 py-2 rounded-lg ${isDark ? 'bg-cyan-950/30' : 'bg-purple-100'} hidden sm:block`}>
+                                <div className={`${isDark ? 'text-cyan-300 border-cyan-400/20 bg-cyan-950/30' : 'text-purple-600 border-purple-200 bg-purple-100'} hidden md:block text-xs sm:text-sm font-bold px-3 py-2 rounded-xl border whitespace-nowrap`}>
                                     {userRole && `${isOwnerAdmin ? 'Owner Admin' : userRole}`}
                                 </div>
                                 {userRole === 'Admin' && (
                                     <Link
                                         to="/blog/admin"
-                                        className={`${isDark ? 'text-white bg-indigo-700 hover:bg-indigo-600' : 'text-white bg-indigo-600 hover:bg-indigo-700'} flex items-center gap-2 font-bold rounded-lg text-xs sm:text-sm px-2 sm:px-4 py-2 transition-all duration-300 transform hover:scale-105`}
+                                        className={`${isDark ? 'text-white bg-indigo-700 hover:bg-indigo-600' : 'text-white bg-indigo-600 hover:bg-indigo-700'} flex items-center gap-2 font-bold rounded-xl text-xs sm:text-sm px-3 sm:px-4 py-2.5 transition-all duration-300 whitespace-nowrap`}
                                         title="Admin Dashboard"
                                     >
                                         <LayoutDashboard size={16} className="sm:w-5 sm:h-5" />
-                                        <span className="hidden sm:inline">Dashboard</span>
+                                        <span>Dashboard</span>
                                     </Link>
                                 )}
                                 <button
                                     onClick={handleLogout}
-                                    className={`${isDark ? 'text-white bg-gradient-to-r from-red-600 to-pink-600 hover:from-red-700 hover:to-pink-700' : 'text-white bg-gradient-to-r from-red-500 to-pink-500 hover:from-red-600 hover:to-pink-600'} flex items-center gap-1 sm:gap-2 focus:ring-4 ${isDark ? 'focus:ring-red-700/50' : 'focus:ring-red-300'} font-bold rounded-lg text-xs sm:text-sm px-2 sm:px-4 py-2 focus:outline-none transition-all duration-300 transform hover:scale-105`}
+                                    className={`${isDark ? 'text-white bg-gradient-to-r from-red-600 to-pink-600 hover:from-red-700 hover:to-pink-700' : 'text-white bg-gradient-to-r from-red-500 to-pink-500 hover:from-red-600 hover:to-pink-600'} flex items-center gap-1 sm:gap-2 focus:ring-4 ${isDark ? 'focus:ring-red-700/50' : 'focus:ring-red-300'} font-bold rounded-xl text-xs sm:text-sm px-3 sm:px-4 py-2.5 focus:outline-none transition-all duration-300 whitespace-nowrap`}
                                 >
                                     <LogOut size={16} className="sm:w-5 sm:h-5" />
                                     <span className="hidden sm:inline">Logout</span>
@@ -105,108 +142,67 @@ export default function Header() {
                             <>
                                 <Link
                                     to="/login"
-                                    className={`${isDark ? 'text-cyan-300 hover:text-cyan-100 hover:bg-cyan-950/30 bg-cyan-950/10' : 'text-purple-700 hover:text-purple-900 hover:bg-purple-100 bg-purple-50'} focus:ring-4 ${isDark ? 'focus:ring-cyan-500/50' : 'focus:ring-purple-300'} font-bold rounded-lg text-xs sm:text-sm px-2 sm:px-4 py-2 focus:outline-none transition-all duration-300 border ${isDark ? 'border-cyan-700/50' : 'border-purple-200'}`}
+                                    className={`${isDark ? 'text-cyan-300 hover:text-cyan-100 hover:bg-cyan-950/30 bg-cyan-950/10' : 'text-purple-700 hover:text-purple-900 hover:bg-purple-100 bg-purple-50'} focus:ring-4 ${isDark ? 'focus:ring-cyan-500/50' : 'focus:ring-purple-300'} font-bold rounded-xl text-xs sm:text-sm px-3 sm:px-4 py-2.5 focus:outline-none transition-all duration-300 border ${isDark ? 'border-cyan-700/50' : 'border-purple-200'} whitespace-nowrap`}
                                 >
                                     Login
                                 </Link>
                                 <Link
                                     to="/services"
-                                    className={`${isDark ? 'text-white bg-gradient-to-r from-orange-500 to-pink-500 hover:from-orange-600 hover:to-pink-600' : 'text-white bg-gradient-to-r from-orange-500 via-purple-500 to-blue-500 hover:from-orange-600 hover:via-purple-600 hover:to-blue-600'} focus:ring-4 focus:ring-orange-300 font-bold rounded-lg text-xs sm:text-sm px-2 sm:px-4 py-2 focus:outline-none transition-all duration-300 transform hover:scale-105 shadow-lg`}
+                                    className={`${isDark ? 'text-white bg-gradient-to-r from-orange-500 to-pink-500 hover:from-orange-600 hover:to-pink-600' : 'text-white bg-gradient-to-r from-orange-500 via-purple-500 to-blue-500 hover:from-orange-600 hover:via-purple-600 hover:to-blue-600'} focus:ring-4 focus:ring-orange-300 font-bold rounded-xl text-xs sm:text-sm px-3 sm:px-4 py-2.5 focus:outline-none transition-all duration-300 shadow-lg whitespace-nowrap`}
                                 >
                                     Start
                                 </Link>
                             </>
                         )}
                     </div>
+                </div>
 
-                    {/* Navigation Menu */}
+                {isMenuOpen && (
                     <div
-                        className={`${isMenuOpen ? 'flex' : 'hidden'} md:flex flex-col md:flex-row w-full md:w-auto md:order-1 md:ml-0 mt-4 md:mt-0 items-start md:items-center`}
+                        className={`${isDark ? 'bg-slate-900/95 border-purple-700/60' : 'bg-white/95 border-slate-200'} ${isAdminView ? 'absolute left-4 right-4 top-full mt-3 md:left-auto md:right-6 md:w-80' : 'absolute left-4 right-4 top-full mt-3 md:hidden'} z-50 rounded-2xl border shadow-2xl backdrop-blur-xl`}
                         id="mobile-menu-2"
                     >
-                        <ul className={`flex flex-col md:flex-row md:space-x-6 lg:space-x-8 w-full md:w-auto ${isDark ? 'text-white' : 'text-gray-800'}`}>
+                        <ul className={`flex flex-col gap-1 p-3 ${isDark ? 'text-white' : 'text-gray-800'}`}>
                             <li>
-                                <NavLink
-                                to="/"
-                                    onClick={closeMenu}
-                                    className={({isActive}) =>
-                                        `block py-2 px-0 md:px-2 lg:px-0 duration-200 ${isActive ? "text-orange-500 font-bold" : isDark ? "text-white" : "text-gray-800"} border-b md:border-0 hover:text-orange-500 transition-colors`
-                                    }
-                                >
+                                <NavLink to="/" onClick={closeMenu} className={navLinkClassName}>
                                     Home
                                 </NavLink>
                             </li>
                             <li>
-                                <NavLink
-                                to="/about"
-                                    onClick={closeMenu}
-                                    className={({isActive}) =>
-                                        `block py-2 px-0 md:px-2 lg:px-0 duration-200 ${isActive ? "text-orange-500 font-bold" : isDark ? "text-white" : "text-gray-800"} border-b md:border-0 hover:text-orange-500 transition-colors`
-                                    }
-                                >
+                                <NavLink to="/about" onClick={closeMenu} className={navLinkClassName}>
                                     About
                                 </NavLink>
                             </li>
                             <li>
-                                <NavLink
-                                to="/services"
-                                    onClick={closeMenu}
-                                    className={({isActive}) =>
-                                        `block py-2 px-0 md:px-2 lg:px-0 duration-200 ${isActive ? "text-orange-500 font-bold" : isDark ? "text-white" : "text-gray-800"} border-b md:border-0 hover:text-orange-500 transition-colors`
-                                    }
-                                >
+                                <NavLink to="/services" onClick={closeMenu} className={navLinkClassName}>
                                     Services
                                 </NavLink>
                             </li>
                             <li>
-                                <NavLink
-                                to="/contact"
-                                    onClick={closeMenu}
-                                    className={({isActive}) =>
-                                        `block py-2 px-0 md:px-2 lg:px-0 duration-200 ${isActive ? "text-orange-500 font-bold" : isDark ? "text-white" : "text-gray-800"} border-b md:border-0 hover:text-orange-500 transition-colors`
-                                    }
-                                >
+                                <NavLink to="/contact" onClick={closeMenu} className={navLinkClassName}>
                                     Contact
                                 </NavLink>
                             </li>
                             <li>
-                                <NavLink
-                                to="/github"
-                                    onClick={closeMenu}
-                                    className={({isActive}) =>
-                                        `block py-2 px-0 md:px-2 lg:px-0 duration-200 ${isActive ? "text-orange-500 font-bold" : isDark ? "text-white" : "text-gray-800"} border-b md:border-0 hover:text-orange-500 transition-colors`
-                                    }
-                                >
+                                <NavLink to="/github" onClick={closeMenu} className={navLinkClassName}>
                                     Github
                                 </NavLink>
                             </li>
                             <li>
-                                <NavLink
-                                to="/blog"
-                                    onClick={closeMenu}
-                                    className={({isActive}) =>
-                                        `block py-2 px-0 md:px-2 lg:px-0 duration-200 ${isActive ? "text-orange-500 font-bold" : isDark ? "text-white" : "text-gray-800"} border-b md:border-0 hover:text-orange-500 transition-colors`
-                                    }
-                                >
+                                <NavLink to="/blog" onClick={closeMenu} className={navLinkClassName}>
                                     Blog
                                 </NavLink>
                             </li>
                             {isLoggedIn && userRole === 'Admin' && (
                                 <li>
-                                    <NavLink
-                                    to="/blog/admin"
-                                        onClick={closeMenu}
-                                        className={({isActive}) =>
-                                            `block py-2 px-0 md:px-2 lg:px-0 duration-200 ${isActive ? "text-orange-500 font-bold" : isDark ? "text-white" : "text-gray-800"} border-b md:border-0 hover:text-orange-500 transition-colors`
-                                        }
-                                    >
+                                    <NavLink to="/blog/admin" onClick={closeMenu} className={navLinkClassName}>
                                         Admin
                                     </NavLink>
                                 </li>
                             )}
                         </ul>
                     </div>
-                </div>
+                )}
             </nav>
         </header>
     );

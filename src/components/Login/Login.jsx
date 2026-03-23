@@ -2,12 +2,26 @@
 import { useNavigate } from '@router'
 import { Mail, Lock, User, Building2, Briefcase, Apple, Github } from 'lucide-react'
 
-const OWNER_ADMIN_EMAIL = 'muhammadyousaf5482@gmail.com'
+async function readApiResult(response) {
+  let data = null
+  try {
+    data = await response.json()
+  } catch {
+    data = null
+  }
+  if (!response.ok) {
+    const apiMessage = data?.error || data?.message
+    throw new Error(apiMessage || `Request failed with status ${response.status}`)
+  }
+  return data
+}
 
 export default function Login() {
   const navigate = useNavigate()
   const [isLogin, setIsLogin] = useState(true)
   const [isPartner, setIsPartner] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [errorMessage, setErrorMessage] = useState("")
   const [formData, setFormData] = useState({
     fullName: '',
     email: '',
@@ -36,28 +50,60 @@ export default function Login() {
     }))
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    console.log('Form submitted:', formData)
+    setErrorMessage("")
+    setIsSubmitting(true)
+    try {
+      let user
+      if (isLogin) {
+        const response = await fetch('/api/auth/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            email: formData.email,
+            password: formData.password,
+          }),
+        })
+        const data = await readApiResult(response)
+        user = data.user
+      } else {
+        if (formData.password !== formData.confirmPassword) {
+          throw new Error('Password and confirm password do not match.')
+        }
+        const response = await fetch('/api/auth/register', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            fullName: formData.fullName,
+            email: formData.email,
+            password: formData.password,
+            phone: formData.phone,
+            company: formData.company,
+            projectName: formData.projectName,
+            projectDescription: formData.projectDescription,
+            role: formData.role,
+          }),
+        })
+        const data = await readApiResult(response)
+        user = data.user
+      }
 
-    const normalizedEmail = formData.email.trim().toLowerCase()
-    const isOwnerAdmin = normalizedEmail === OWNER_ADMIN_EMAIL
-    const isAdminEmail = isOwnerAdmin || normalizedEmail.includes('admin')
-    const resolvedRole = isAdminEmail ? 'Admin' : formData.role
-    const resolvedName = formData.fullName || (isAdminEmail ? 'Admin User' : 'User')
-    
-    // Store login info in localStorage
-    localStorage.setItem('isLoggedIn', 'true')
-    localStorage.setItem('userRole', resolvedRole)
-    localStorage.setItem('userEmail', normalizedEmail)
-    localStorage.setItem('userName', resolvedName)
-    localStorage.setItem('isOwnerAdmin', isOwnerAdmin ? 'true' : 'false')
-    
-    alert(`Welcome ${resolvedName}! You have been ${isLogin ? 'logged in' : 'registered'} successfully as ${isOwnerAdmin ? 'Owner Admin' : resolvedRole}.`)
-    
-    // Redirect to home page
-    navigate('/')
-    window.location.reload() // Refresh to update header
+      // Store login info in localStorage for client UX state
+      localStorage.setItem('isLoggedIn', 'true')
+      localStorage.setItem('userRole', user.role)
+      localStorage.setItem('userEmail', user.email)
+      localStorage.setItem('userName', user.fullName)
+      localStorage.setItem('isOwnerAdmin', user.isOwnerAdmin ? 'true' : 'false')
+
+      alert(`Welcome ${user.fullName}! You have been ${isLogin ? 'logged in' : 'registered'} successfully as ${user.isOwnerAdmin ? 'Owner Admin' : user.role}.`)
+      navigate('/')
+      window.location.reload()
+    } catch (error) {
+      setErrorMessage(error.message || 'Something went wrong.')
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   const handleSocialLogin = (provider) => {
@@ -163,9 +209,10 @@ export default function Login() {
 
               <button
                 type="submit"
-                className="w-full bg-gradient-to-r from-orange-500 to-orange-600 text-white font-bold py-3 rounded-lg hover:shadow-lg transition-all transform hover:scale-105"
+                disabled={isSubmitting}
+                className="w-full bg-gradient-to-r from-orange-500 to-orange-600 text-white font-bold py-3 rounded-lg hover:shadow-lg transition-all transform hover:scale-105 disabled:opacity-60 disabled:cursor-not-allowed"
               >
-                Sign In
+                {isSubmitting ? 'Please wait...' : 'Sign In'}
               </button>
             </form>
           ) : (
@@ -359,11 +406,16 @@ export default function Login() {
 
               <button
                 type="submit"
-                className="w-full bg-gradient-to-r from-orange-500 to-orange-600 text-white font-bold py-3 rounded-lg hover:shadow-lg transition-all transform hover:scale-105"
+                disabled={isSubmitting}
+                className="w-full bg-gradient-to-r from-orange-500 to-orange-600 text-white font-bold py-3 rounded-lg hover:shadow-lg transition-all transform hover:scale-105 disabled:opacity-60 disabled:cursor-not-allowed"
               >
-                Create Account
+                {isSubmitting ? 'Please wait...' : 'Create Account'}
               </button>
             </form>
+          )}
+
+          {errorMessage && (
+            <p className="text-center text-sm text-red-600 dark:text-red-400 mt-4">{errorMessage}</p>
           )}
 
           {/* Divider */}
